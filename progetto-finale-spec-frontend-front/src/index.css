@@ -1,0 +1,34 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body {
+  font-family: "Montserrat", Arial, sans-serif;
+}
+.navbar {
+  padding: 10px;
+  padding-top: 8px;
+  background: linear-gradient(90deg, #ff9800 0%, #ff5722 100%);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.07);
+}
+
+.navbar .navbar-brand {
+  color: #fff !important;
+  font-weight: bold;
+  letter-spacing: 1px;
+}
+
+.navbar .nav-link {
+  color: #fff !important;
+  font-weight: 500;
+  margin-right: 10px;
+  transition: color 0.2s;
+}
+
+.navbar .nav-link:hover,
+.navbar .nav-link.active {
+  color: #212121 !important;
+  background: rgba(255, 255, 255, 0.7);
+  border-radius: 4px;
+}
