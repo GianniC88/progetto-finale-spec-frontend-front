@@ -5,12 +5,14 @@ function Navbar() {
 	const location = useLocation();
 
 	return (
-		<nav className="navbar navbar-expand-lg mb-4 custom-navbar">
+		<nav className="navbar navbar-expand-lg custom-navbar">
 			<div className="container-fluid">
 				{/* Logo a sinistra */}
 				<Link className="navbar-brand d-flex align-items-center" to="/">
-					<img src="/logo.png" alt="JohnPepper Logo" width="48" height="48" className="me-2" />
-					<span className="fw-bold d-none d-md-inline">JohnPepper</span>
+					<div className="logo">
+						<img src="/logo4.png" alt="JohnPepper Logo" width="48" height="48" className="me-2 " />
+					</div>
+					<span className="fw-bold d-none display-4 d-md-inline">JohnPepper</span>
 				</Link>
 				{/* Hamburger per mobile */}
 				<button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
@@ -54,7 +56,7 @@ function Navbar() {
 					</ul>
 				</div>
 			</div>
-		</nav>
+		</nav >
 	);
 }
 

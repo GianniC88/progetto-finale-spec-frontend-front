@@ -1,7 +1,10 @@
 export default function Compare() {
 	return (
 		<>
-			compare
+			<div>
+
+				compare
+			</div>
 		</>
 	)
 }

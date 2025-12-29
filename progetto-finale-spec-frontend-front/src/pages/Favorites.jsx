@@ -1,7 +1,10 @@
 export default function Favorite() {
 	return (
 		<>
-			favorite
+			<div>
+
+				favorite
+			</div >
 		</>
 	)
 }
