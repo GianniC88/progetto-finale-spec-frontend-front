@@ -10,6 +10,7 @@ body {
   padding: 10px;
   padding-top: 8px;
   background: linear-gradient(270deg, #ff9800 0%, #ff5722 100%);
+  box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
 }
 .navbar .nav-link {
   color: #fff;

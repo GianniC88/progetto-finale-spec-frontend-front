@@ -23,17 +23,13 @@ function Navbar() {
 				<div className="collapse navbar-collapse" id="navbarNav">
 					<ul className="navbar-nav mx-auto">
 						<li className="nav-item">
-							<Link className={`nav-link${location.pathname === "/" ? " active" : ""}`} to="/">Tutti</Link>
+							<Link className={`nav-link${location.pathname === "/" ? " active" : ""}`} to="/">Home</Link>
 						</li>
+
 						<li className="nav-item">
-							<Link className={`nav-link${location.pathname === "/category/creme" ? " active" : ""}`} to="/category/creme">Creme</Link>
+							<Link className={`nav-link${location.pathname === "/category/freschi" ? " active" : ""}`} to="/category/freschi">Prodotti</Link>
 						</li>
-						<li className="nav-item">
-							<Link className={`nav-link${location.pathname === "/category/freschi" ? " active" : ""}`} to="/category/freschi">Freschi</Link>
-						</li>
-						<li className="nav-item">
-							<Link className={`nav-link${location.pathname === "/category/polvere" ? " active" : ""}`} to="/category/polvere">Polvere</Link>
-						</li>
+
 						<li className="nav-item">
 							<Link className={`nav-link${location.pathname === "/compare" ? " active" : ""}`} to="/compare">Comparatore</Link>
 						</li>

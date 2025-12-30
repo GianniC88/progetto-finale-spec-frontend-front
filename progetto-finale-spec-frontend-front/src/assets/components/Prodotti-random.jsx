@@ -1,45 +1,35 @@
-import { useState, useContext } from "react";
-import { GlobalContext } from "../../context/GlobalContext";
+import { useEffect, useState } from "react";
+import Card from "./Card";
 
 export default function ProdottiRandom() {
-	const { prodotti } = useContext(GlobalContext);
-	const [indice, setIndice] = useState(0);
+	const [prodotti, setProdotti] = useState([]);
+	const [loading, setLoading] = useState(true);
 
-	const prodottiRandom = prodotti.slice().sort(() => 0.5 - Math.random());
-	const perPagina = 4;
-	const max = Math.max(0, prodottiRandom.length - perPagina);
+	useEffect(() => {
+		const apiUrl = import.meta.env.VITE_API_URL || "http://localhost:3001";
+		fetch(`${apiUrl}/products`)
+			.then(res => res.json())
+			.then(data => {
+				const all = data.products || data;
+				const random = all
+					.sort(() => 0.5 - Math.random())
+					.slice(0, 4);
+				setProdotti(random);
+				setLoading(false);
+			})
+			.catch(() => setLoading(false));
+	}, []);
 
-	const avanti = () => setIndice(i => (i + perPagina > max ? 0 : i + perPagina));
-	const indietro = () => setIndice(i => (i - perPagina < 0 ? max : i - perPagina));
+	if (loading) return <div>Caricamento...</div>;
+	if (!prodotti.length) return <div>Nessun prodotto trovato.</div>;
 
-	const visibili = prodottiRandom.slice(indice, indice + perPagina);
-
-	if (!prodotti.length) return <div>Caricamento...</div>;
-	if (!visibili.length) return <div>Nessun prodotto trovato.</div>;
 	return (
 		<div className="container">
 			<h2>Prodotti Random</h2>
 			<div className="carosello-lista d-flex">
-				{visibili.map(prodotto => (
-					<div className="card-prodotto" key={prodotto.id ?? Math.random()}>
-						<div className="card-img">
-							<img src={prodotto.image} alt={prodotto.title} />
-						</div>
-						<h4>{prodotto.title}</h4>
-						<ul className="caratteristiche-carosello">
-							<li><strong>Categoria:</strong> {prodotto.category || "-"}</li>
-							<li><strong>Prezzo:</strong> {prodotto.price ? prodotto.price + " €" : "-"}</li>
-							<li><strong>Brand:</strong> {prodotto.brand || "-"}</li>
-							<li><strong>Piccantezza:</strong> {prodotto.spiciness || "-"}</li>
-							<li><strong>Disponibile:</strong> {prodotto.available !== undefined ? (prodotto.available ? "Sì" : "No") : "-"}</li>
-							<li><strong>Descrizione:</strong> {prodotto.description || "-"}</li>
-						</ul>
-					</div>
+				{prodotti.map(prodotto => (
+					<Card prodotto={prodotto} key={prodotto.id} />
 				))}
-			</div>
-			<div className="carosello-bottoni">
-				<button onClick={indietro} className="btn btn-secondary me-2">{"<"}</button>
-				<button onClick={avanti} className="btn btn-secondary">{">"}</button>
 			</div>
 		</div>
 	);

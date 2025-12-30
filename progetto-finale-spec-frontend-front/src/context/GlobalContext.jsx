@@ -9,6 +9,8 @@ export function GlobalProvider({ children }) {
 			.then(data => {
 				console.log("Risposta fetch prodotti:", data);
 				setProdotti(data);
+
+
 			})
 			.catch(error => console.error(error))
 	}, [])

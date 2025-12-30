@@ -1,5 +1,5 @@
 import ProdottiRandom from "../assets/components/Prodotti-random";
-
+import Product from "../pages/Product.jsx";
 
 export default function Home() {
 
@@ -15,10 +15,12 @@ export default function Home() {
 			</div>
 			<div className="prodotti-random">
 				<ProdottiRandom />
+				<Product />
+
 			</div >
 			<div className="container">
 				<div className="row g-a">
-					<div className="col-12 col-md-4 p-3">
+					{/* <div className="col-12 col-md-4 p-3">
 						<div className="card-img">
 							<img src="/freschi/Mix di peperoncino fresco habanero 100gr.png" alt="mix habanero fresco" />
 							<div className="category-card">
@@ -28,7 +30,6 @@ export default function Home() {
 							</div>
 						</div>
 					</div>
-
 
 
 					<div className="col-12 col-md-4 p-3">
@@ -48,7 +49,7 @@ export default function Home() {
 								<p>Le migliori creme di peperoncino, pronte da spalmare o cucinare.</p>
 							</div>
 						</div>
-					</div>
+					</div> */}
 				</div>
 			</div>
 		</>
