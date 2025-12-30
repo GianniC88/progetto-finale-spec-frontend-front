@@ -41,6 +41,9 @@ export function GlobalProvider({ children }) {
 		localStorage.setItem("cart", JSON.stringify(cart));
 	}, [cart]);
 
+
+	const isInCart = id => cart.includes(id);
+
 	const addToCart = id => {
 		setCart(list => [...list, id]);
 	};
@@ -69,6 +72,7 @@ export function GlobalProvider({ children }) {
 			isFavorite,
 			cart,
 			addToCart,
+			isInCart,
 			removeFromCart,
 			decreaseFromCart
 		}}>

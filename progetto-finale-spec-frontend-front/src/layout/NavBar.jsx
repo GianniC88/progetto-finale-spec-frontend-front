@@ -25,7 +25,6 @@ function Navbar() {
 						<li className="nav-item">
 							<Link className={`nav-link${location.pathname === "/" ? " active" : ""}`} to="/">Home</Link>
 						</li>
-
 						<li className="nav-item">
 							<Link className={`nav-link${location.pathname === "/category/freschi" ? " active" : ""}`} to="/category/freschi">Prodotti</Link>
 						</li>

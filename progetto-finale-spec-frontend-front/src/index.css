@@ -99,6 +99,53 @@ body {
   flex-direction: column;
   align-items: center;
 }
+/* Stile per la card dettaglio prodotto */
+.card-detail {
+  background: #fff;
+  border-radius: 18px;
+  box-shadow: 0 4px 18px rgba(255, 87, 34, 0.1), 0 1.5px 8px rgba(0, 0, 0, 0.07);
+  padding: 2rem 1.5rem 1.5rem 1.5rem;
+  margin: 2rem auto;
+  max-width: 420px;
+  transition: box-shadow 0.2s;
+}
+
+.card-detail:hover {
+  box-shadow: 0 8px 32px rgba(255, 152, 0, 0.13), 0 2px 12px rgba(0, 0, 0, 0.1);
+}
+
+.card-detail h2 {
+  font-family: "Oswald", Arial, sans-serif;
+  color: #ff5722;
+  margin-bottom: 1rem;
+  font-size: 2rem;
+  text-align: center;
+}
+
+.card-detail img {
+  display: block;
+  margin: 0 auto 1rem auto;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(255, 152, 0, 0.1);
+  max-width: 90%;
+}
+
+.card-detail ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.card-detail li {
+  margin-bottom: 0.7em;
+  font-size: 1.08em;
+  color: #333;
+}
+
+.card-detail strong {
+  color: #ff9800;
+  font-weight: 600;
+}
 .img-principale {
   width: 120px;
   height: 120px;
@@ -125,4 +172,77 @@ body {
   padding: 0;
   list-style: none;
   width: 100%;
+}
+
+/* ProductRow styles */
+.product-row {
+  height: 60px;
+}
+
+.product-title-cell {
+  max-width: 180px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-weight: 500;
+  font-size: 1em;
+  padding: 12px 16px;
+}
+
+.product-title-link {
+  color: inherit;
+  text-decoration: none;
+  display: inline-block;
+  max-width: 100%;
+  margin: 10px 0;
+}
+
+.product-category-cell {
+  width: 90px;
+  font-size: 0.98em;
+  padding: 12px 16px;
+}
+
+.product-actions-cell {
+  width: 120px;
+  padding: 8px 16px;
+}
+
+.product-actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  gap: 8px;
+  background: #f8f9fa;
+  border-radius: 8px;
+  padding: 6px 10px;
+}
+
+.compare-btn {
+  background: none;
+  border: none;
+  font-size: 1.1em;
+  cursor: pointer;
+  padding: 0;
+}
+
+.compare-msg {
+  margin-left: 6px;
+  color: green;
+  font-size: 0.85em;
+}
+
+@media (max-width: 1024px) {
+  .custom-navbar {
+    border-bottom: none !important;
+    box-shadow: none !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
+  .product-actions-cell {
+    padding-right: 4px !important;
+    padding-left: 4px !important;
+    background: #f8f9fa;
+    border-radius: 8px;
+  }
 }

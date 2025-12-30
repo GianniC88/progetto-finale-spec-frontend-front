@@ -39,9 +39,7 @@ export default function Favorites() {
 					{dettagli.map(prodotto => (
 						<div className="col-12 col-md-6 col-lg-4 mb-4" key={prodotto.id}>
 							<CardDetail prodotto={prodotto} />
-							<div className="mt-2">
-								<FavoriteButton prodottoId={prodotto.id} />
-							</div>
+
 						</div>
 					))}
 				</div>

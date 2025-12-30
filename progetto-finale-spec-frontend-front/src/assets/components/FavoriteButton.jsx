@@ -8,7 +8,7 @@ export default function FavoriteButton({ prodottoId }) {
 	return (
 		<button
 			onClick={() => toggleFavorite(prodottoId)}
-			title="Aggiungi ai preferiti"
+			title={isSelected ? "Già nei preferiti" : "Aggiungi ai preferiti"}
 			style={{
 				background: "none",
 				border: "none",

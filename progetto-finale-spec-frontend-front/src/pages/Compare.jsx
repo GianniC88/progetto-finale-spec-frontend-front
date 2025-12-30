@@ -7,7 +7,7 @@ export default function Compare() {
 	const [prodotti, setProdotti] = useState([]);
 
 	useEffect(() => {
-		const apiUrl = import.meta.env.VITE_API_URL || "http://localhost:3001";
+		const apiUrl = import.meta.env.VITE_API_URL;
 		if (!compareList || compareList.length === 0) {
 			setProdotti([]);
 			return;

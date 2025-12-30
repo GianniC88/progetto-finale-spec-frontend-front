@@ -1,7 +1,8 @@
 import { useContext, useEffect, useState } from "react";
 import { GlobalContext } from "../context/GlobalContext";
-
+import ButtonAddRemove from "../assets/components/ButtonAddRemove";
 export default function Carrello() {
+
 	const { cart, removeFromCart, addToCart, decreaseFromCart } = useContext(GlobalContext);
 	const [dettagli, setDettagli] = useState([]);
 	const [loading, setLoading] = useState(true);
@@ -14,7 +15,7 @@ export default function Carrello() {
 	}, {});
 
 	useEffect(() => {
-		const apiUrl = import.meta.env.VITE_API_URL || "http://localhost:3001";
+		const apiUrl = import.meta.env.VITE_API_URL;
 		if (cart.length === 0) {
 			setDettagli([]);
 			setLoading(false);
@@ -93,18 +94,9 @@ export default function Carrello() {
 										{prodotto.price ? `${prodotto.price} €` : "-"}
 									</td>
 									<td>
-										<button
-											className="btn btn-sm btn-outline-secondary"
-											onClick={() => decreaseFromCart(prodotto.id)}
-											style={{ minWidth: 28 }}
-											disabled={cartCount[prodotto.id] <= 1}
-										>-</button>
-										<span className="mx-2">{cartCount[prodotto.id]}</span>
-										<button
-											className="btn btn-sm btn-outline-secondary"
-											onClick={() => addToCart(prodotto.id)}
-											style={{ minWidth: 28 }}
-										>+</button>
+										<td>
+											<ButtonAddRemove prodottoId={prodotto.id} quantity={cartCount[prodotto.id]} />
+										</td>
 									</td>
 									<td>
 										{prodotto.price

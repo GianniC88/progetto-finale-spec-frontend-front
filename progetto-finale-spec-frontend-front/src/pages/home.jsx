@@ -1,4 +1,4 @@
-import ProdottiRandom from "../assets/components/Prodotti-random";
+
 import Product from "../pages/Product.jsx";
 
 export default function Home() {
