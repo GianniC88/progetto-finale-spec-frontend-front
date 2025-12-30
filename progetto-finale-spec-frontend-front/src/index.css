@@ -20,11 +20,11 @@ body {
   padding: 8px 18px;
   border-radius: 12px;
   background: transparent;
-  position: relative;
   transition: color 0.2s, background 0.3s, box-shadow 0.3s;
   box-shadow: none;
   outline: none;
   border: none;
+  margin-right: 15px;
 }
 
 /* Effetto hover/active: sfondo bianco leggero e testo arancione */
@@ -35,6 +35,7 @@ body {
   box-shadow: 0 2px 8px rgba(255, 87, 34, 0.1);
   text-decoration: none;
 }
+
 .logo {
   background: #560707;
   border-radius: 50%;
@@ -88,15 +89,6 @@ body {
   padding: 3rem 2rem;
 }
 
-.carosello-prodotti {
-  margin: 32px 0;
-}
-.carosello-lista {
-  display: flex;
-  gap: 16px;
-  align-items: stretch;
-  flex-wrap: wrap;
-}
 .card-prodotto {
   border: 1px solid #ccc;
   border-radius: 8px;
@@ -133,8 +125,4 @@ body {
   padding: 0;
   list-style: none;
   width: 100%;
-}
-.carosello-bottoni {
-  margin-top: 16px;
-  text-align: center;
 }

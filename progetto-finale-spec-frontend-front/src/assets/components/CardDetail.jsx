@@ -30,7 +30,7 @@ const CardDetail = ({ prodotto }) => {
 				<li><strong>{labels.brand}:</strong> {prodotto.brand || "-"}</li>
 				<li><strong>{labels.description}:</strong> {prodotto.description || "-"}</li>
 				<li><strong>{labels.spiciness}:</strong> {prodotto.spiciness || "-"}</li>
-				<li><strong>{labels.available}:</strong> {prodotto.available !== undefined ? (prodotto.available ? "Sì" : "No") : "-"}</li>
+
 				{prodotto.images && Array.isArray(prodotto.images) && (
 					<li>
 						<strong>{labels.images}:</strong>

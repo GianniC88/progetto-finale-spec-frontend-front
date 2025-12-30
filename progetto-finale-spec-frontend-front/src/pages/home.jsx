@@ -14,7 +14,7 @@ export default function Home() {
 
 			</div>
 			<div className="prodotti-random">
-				<ProdottiRandom />
+
 				<Product />
 
 			</div >

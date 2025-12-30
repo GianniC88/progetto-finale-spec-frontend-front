@@ -5,7 +5,7 @@ function Navbar() {
 	const location = useLocation();
 
 	return (
-		<nav className="navbar navbar-expand-lg custom-navbar">
+		<nav className="navbar navbar-expand-lg custom-navbar mr-4">
 			<div className="container-fluid">
 				{/* Logo a sinistra */}
 				<Link className="navbar-brand d-flex align-items-center" to="/">
@@ -35,10 +35,8 @@ function Navbar() {
 						</li>
 					</ul>
 					{/* Search e icone a destra */}
-					<form className="d-flex me-3" role="search">
-						<input className="form-control me-2" type="search" placeholder="Cerca" aria-label="Cerca" />
-					</form>
-					<ul className="navbar-nav mb-2 mb-lg-0">
+
+					<ul className="navbar-nav mb-2 mb-lg-0 ms-auto">
 						<li className="nav-item">
 							<Link className={`nav-link${location.pathname === "/favorites" ? " active" : ""}`} to="/favorites">
 								<span role="img" aria-label="Preferiti">❤️</span>
