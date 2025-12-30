@@ -3,22 +3,26 @@ import { GlobalContext } from "../context/GlobalContext";
 import CardDetail from "../assets/components/CardDetail";
 
 export default function Compare() {
-	const { compareList } = useContext(GlobalContext); // compareList deve essere un array di id
+	const { compareList } = useContext(GlobalContext);
 	const [prodotti, setProdotti] = useState([]);
 
 	useEffect(() => {
 		const apiUrl = import.meta.env.VITE_API_URL;
-		if (!compareList || compareList.length === 0) {
+		const validIds = Array.isArray(compareList)
+			? compareList.filter(id => typeof id === "string" || typeof id === "number")
+			: [];
+		if (validIds.length === 0) {
 			setProdotti([]);
 			return;
 		}
 		Promise.all(
-			compareList.map(id =>
+			validIds.map(id =>
 				fetch(`${apiUrl}/products/${id}`)
-					.then(res => res.json())
-					.then(data => data.product || data)
+					.then(res => res.ok ? res.json() : null)
+					.then(data => (data && (data.product || data)) || null)
+					.catch(() => null)
 			)
-		).then(setProdotti);
+		).then(prodotti => setProdotti(prodotti.filter(Boolean)));
 	}, [compareList]);
 
 	return (

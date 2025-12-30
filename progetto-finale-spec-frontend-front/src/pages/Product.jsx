@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import ProductRow from "../assets/components/ProductRow";
 import ProductFilters from "../assets/components/ProductFilters";
+import useDebounce from "../assets/customHook/useDebounce";
 
 export default function ListaProdotti() {
 	const [prodotti, setProdotti] = useState([]);
@@ -9,10 +10,12 @@ export default function ListaProdotti() {
 	const [sort, setSort] = useState("title-asc");
 	const [categorie, setCategorie] = useState([]);
 
+	const debouncedSearch = useDebounce(search, 400); // debounce qui
+
 	useEffect(() => {
 		const apiUrl = import.meta.env.VITE_API_URL;
 		let url = `${apiUrl}/products?`;
-		if (search) url += `search=${encodeURIComponent(search)}&`;
+		if (debouncedSearch) url += `search=${encodeURIComponent(debouncedSearch)}&`;
 		if (category) url += `category=${encodeURIComponent(category)}&`;
 
 		fetch(url)
@@ -27,58 +30,46 @@ export default function ListaProdotti() {
 				if (sort === "category-desc") ordinati.sort((a, b) => b.category.localeCompare(a.category));
 				setProdotti(ordinati);
 			});
-	}, [search, category, sort]);
+	}, [debouncedSearch, category, sort]);
 
 	return (
-		<div className=" container p-4">
-			<h1 className=" fw-bold mb-3 text-center" style={{ fontSize: "3rem" }}>Lista Prodotti</h1>
-			<ProductFilters
-				search={search}
-				setSearch={setSearch}
-				category={category}
-				setCategory={setCategory}
-				sort={sort}
-				setSort={setSort}
-				categorie={categorie}
-			/>
-			<div className="card shadow-sm"
-				style={{
-					borderRadius: "12px",
-					background: "linear-gradient(135deg, #f8fafc 85%, #e0e7ef 100%)",
-					border: "none"
-				}}
-			>
-				<div className="card-body p-0">
-					<table
-						className="table mb-0 align-middle"
-						style={{
-							borderRadius: "10px",
-							overflow: "hidden",
-							background: "transparent",
-							fontSize: "0.97em"
-						}}
-					>
-						<thead style={{ background: "#f1f3f7" }}>
-							<tr>
-								<th style={{ width: "40%", border: "none", padding: "8px 10px" }}>Titolo</th>
-								<th style={{ width: "20%", border: "none", padding: "8px 10px" }}>Categoria</th>
-								<th style={{ width: "40%", border: "none", padding: "8px 10px" }}></th>
-							</tr>
-						</thead>
-						<tbody>
-							{prodotti.length === 0 ? (
+		<div className="container p-4">
+			<div className="prodotti-section">
+				<h1 className="fw-bold mb-3 text-center titolo-prodotti">Lista Prodotti</h1>
+				<ProductFilters
+					search={search}
+					setSearch={setSearch}
+					category={category}
+					setCategory={setCategory}
+					sort={sort}
+					setSort={setSort}
+					categorie={categorie}
+				/>
+				<div className="card shadow-sm card-prodotti-lista">
+					<div className="card-body p-0">
+						<table className="table mb-0 align-middle tabella-prodotti">
+							<thead>
 								<tr>
-									<td colSpan={3} className="text-center py-3">Nessun prodotto trovato.</td>
+									<th className="th-titolo">Titolo</th>
+									<th className="th-categoria">Categoria</th>
+									<th className="th-azioni"></th>
 								</tr>
-							) : (
-								prodotti.map(prodotto => (
-									<ProductRow prodotto={prodotto} key={prodotto.id} />
-								))
-							)}
-						</tbody>
-					</table>
+							</thead>
+							<tbody>
+								{prodotti.length === 0 ? (
+									<tr>
+										<td colSpan={3} className="text-center py-3">Nessun prodotto trovato.</td>
+									</tr>
+								) : (
+									prodotti.map(prodotto => (
+										<ProductRow prodotto={prodotto} key={prodotto.id} />
+									))
+								)}
+							</tbody>
+						</table>
+					</div>
 				</div>
 			</div>
-		</div >
+		</div>
 	);
 }

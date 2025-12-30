@@ -20,7 +20,7 @@ const CardDetail = ({ prodotto }) => {
 
 	if (!prodotto) return <div>Nessun prodotto trovato.</div>;
 	return (
-		<div className="card-detail">
+		<div className="card-detail card-common">
 			<h2>{prodotto.title}</h2>
 			{prodotto.image && (
 				<img

@@ -13,7 +13,7 @@ export default function Home() {
 				</p>
 
 			</div>
-			<div className="prodotti-random">
+			<div className="prodotti-backgound">
 
 				<Product />
 

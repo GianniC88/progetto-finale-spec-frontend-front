@@ -63,6 +63,26 @@ export function GlobalProvider({ children }) {
 			return list;
 		});
 	};
+
+
+	const [compareList, setCompareList] = useState(() => {
+		const saved = localStorage.getItem("compareList");
+		return saved ? JSON.parse(saved) : [];
+	});
+
+	useEffect(() => {
+		localStorage.setItem("compareList", JSON.stringify(compareList));
+	}, [compareList]);
+	const addToCompare = (id) => {
+		setCompareList(prev => prev.includes(id) ? prev : [...prev, id]);
+	};
+
+	const removeFromCompare = (id) => {
+		setCompareList(prev => prev.filter(item => item !== id));
+	};
+
+	const isCompared = (id) => compareList.includes(id);
+
 	return (
 		<GlobalContext.Provider value={{
 			prodotti,
@@ -74,7 +94,11 @@ export function GlobalProvider({ children }) {
 			addToCart,
 			isInCart,
 			removeFromCart,
-			decreaseFromCart
+			decreaseFromCart,
+			compareList,
+			addToCompare,
+			removeFromCompare,
+			isCompared,
 		}}>
 			{children}
 		</GlobalContext.Provider>

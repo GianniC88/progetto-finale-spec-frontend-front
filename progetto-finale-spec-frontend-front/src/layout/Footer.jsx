@@ -1,7 +1,7 @@
 export default function Footer() {
 	return (
-		<section className="footer-bgcolor">
-			<footer className="footer mt-5 py-4 text-center">
+		<div className="footer-bgcolor">
+			<footer className="footer mb-10 text-center">
 				<div className="container">
 					<div className="row">
 						<div className="col-12 col-md-4 mb-3 mb-md-0">
@@ -18,6 +18,6 @@ export default function Footer() {
 					</div>
 				</div>
 			</footer>
-		</section>
+		</div>
 	)
 }

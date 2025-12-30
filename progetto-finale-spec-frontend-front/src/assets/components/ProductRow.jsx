@@ -4,20 +4,19 @@ import { GlobalContext } from "../../context/GlobalContext";
 import FavoriteButton from "./FavoriteButton";
 import CartButton from "./CartButton";
 import ButtonAddRemove from "./ButtonAddRemove";
+import CompareButton from "./CompareButton";
 
 export default function ProductRow({ prodotto }) {
 	const { addToCompare, isCompared } = useContext(GlobalContext);
 	const [msg, setMsg] = useState("");
 
-	const handleCompare = () => {
-		addToCompare(prodotto.id);
-		setMsg("Prodotto aggiunto al comparatore!");
-		setTimeout(() => setMsg(""), 1500);
-	};
+
+	const imageSrc = prodotto.image || "/placeholder.png";
 
 	return (
 		<tr className="product-row">
 			<td className="product-title-cell">
+
 				<Link
 					to={`/products/${prodotto.id}`}
 					className="product-title-link"
@@ -34,13 +33,7 @@ export default function ProductRow({ prodotto }) {
 					<FavoriteButton prodottoId={prodotto.id} />
 					<CartButton prodottoId={prodotto.id} />
 					<ButtonAddRemove prodottoId={prodotto.id} />
-					<button
-						onClick={handleCompare}
-						title="Aggiungi al comparatore"
-						className="compare-btn"
-					>
-						{isCompared && isCompared(prodotto.id) ? "✔️" : "⇄"}
-					</button>
+					<CompareButton prodottoId={prodotto.id} />
 				</div>
 				{msg && (
 					<span className="compare-msg">
