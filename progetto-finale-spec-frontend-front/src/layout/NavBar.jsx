@@ -1,4 +1,6 @@
 import { Link, useLocation } from "react-router-dom";
+import CartButton from "../assets/components/CartButton";
+import FavoriteButton from "../assets/components/FavoriteButton";
 
 
 function Navbar() {
@@ -37,14 +39,10 @@ function Navbar() {
 
 					<ul className="navbar-nav mb-2 mb-lg-0 ms-auto">
 						<li className="nav-item">
-							<Link className={`nav-link${location.pathname === "/favorites" ? " active" : ""}`} to="/favorites">
-								<span role="img" aria-label="Preferiti">❤️</span>
-							</Link>
+							<FavoriteButton navbar />
 						</li>
 						<li className="nav-item">
-							<Link className="nav-link" to="/cart">
-								<span role="img" aria-label="Carrello">🛒</span>
-							</Link>
+							<CartButton />
 						</li>
 					</ul>
 				</div>

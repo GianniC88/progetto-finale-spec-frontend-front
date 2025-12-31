@@ -36,15 +36,6 @@ const CardDetail = ({ prodotto }) => {
 				<li><strong>{labels.brand}:</strong> {prodotto.brand || "-"}</li>
 				<li><strong>{labels.description}:</strong> {prodotto.description || "-"}</li>
 				<li><strong>{labels.spiciness}:</strong> {prodotto.spiciness || "-"}</li>
-				<div className="d-flex gap-4 mt-4">
-					<FavoriteButton prodottoId={prodotto.id} />
-					{isFavorite && isFavorite(prodotto.id) && (
-						<>
-							<CartButton prodottoId={prodotto.id} />
-							<ButtonAddRemove prodottoId={prodotto.id} />
-						</>
-					)}
-				</div>
 				{prodotto.images && Array.isArray(prodotto.images) && (
 					<li>
 						<strong>{labels.images}:</strong>
@@ -58,6 +49,16 @@ const CardDetail = ({ prodotto }) => {
 					</li>
 				)}
 			</ul>
+			{/* Azioni fuori dalla lista */}
+			<div className="d-flex gap-4 mt-4">
+				<FavoriteButton prodottoId={prodotto.id} />
+				{isFavorite && isFavorite(prodotto.id) && (
+					<>
+						<CartButton prodottoId={prodotto.id} />
+						<ButtonAddRemove prodottoId={prodotto.id} />
+					</>
+				)}
+			</div>
 		</div>
 	);
 };

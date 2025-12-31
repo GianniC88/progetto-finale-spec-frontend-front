@@ -10,13 +10,9 @@ export default function ProductRow({ prodotto }) {
 	const { addToCompare, isCompared } = useContext(GlobalContext);
 	const [msg, setMsg] = useState("");
 
-
-	const imageSrc = prodotto.image || "/placeholder.png";
-
 	return (
 		<tr className="product-row">
 			<td className="product-title-cell">
-
 				<Link
 					to={`/products/${prodotto.id}`}
 					className="product-title-link"
@@ -28,13 +24,17 @@ export default function ProductRow({ prodotto }) {
 			<td className="product-category-cell">
 				{prodotto.category}
 			</td>
-			<td className="product-actions-cell">
-				<div className="product-actions">
-					<FavoriteButton prodottoId={prodotto.id} />
-					<CartButton prodottoId={prodotto.id} />
-					<ButtonAddRemove prodottoId={prodotto.id} />
-					<CompareButton prodottoId={prodotto.id} />
-				</div>
+			<td className="product-favorite-cell">
+				<FavoriteButton prodottoId={prodotto.id} />
+			</td>
+			<td className="product-cart-cell">
+				<CartButton prodottoId={prodotto.id} />
+			</td>
+			<td className="product-addremove-cell">
+				<ButtonAddRemove prodottoId={prodotto.id} />
+			</td>
+			<td className="product-compare-cell">
+				<CompareButton prodottoId={prodotto.id} />
 				{msg && (
 					<span className="compare-msg">
 						{msg}

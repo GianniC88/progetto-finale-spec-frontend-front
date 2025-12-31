@@ -8,7 +8,7 @@ export default function DefaultLayout() {
 			<header>
 				<NavBar />
 			</header>
-			<main style={{ flex: 1 }}>
+			<main style={{ backgroundColor: "orange", flex: 1 }}>
 				<Outlet />
 			</main>
 			<Footer />
