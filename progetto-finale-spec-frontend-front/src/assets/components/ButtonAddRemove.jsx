@@ -6,11 +6,12 @@ export default function ButtonAddRemove({ prodottoId, quantity }) {
 
 	return (
 		<div style={{ display: "flex", flexDirection: "row", alignItems: "center", gap: "6px" }}>
-			<div style={{ display: "flex", flexDirection: "column", gap: "2px" }}>
+			<div style={{ display: "flex", flexDirection: "column", gap: "2px", marginLeft: "20px" }}>
 				<button
 					className="btn btn-outline-secondary"
 					onClick={() => addToCart(prodottoId)}
 					style={{ minWidth: 18, fontSize: "0.85em", padding: "1px 6px", lineHeight: 1 }}
+					title="Aggiungi"
 				>
 					+
 				</button>
@@ -19,11 +20,12 @@ export default function ButtonAddRemove({ prodottoId, quantity }) {
 					onClick={() => decreaseFromCart(prodottoId)}
 					style={{ minWidth: 18, fontSize: "0.85em", padding: "1px 6px", lineHeight: 1 }}
 					disabled={quantity <= 1}
+					title="Diminuisci"
 				>
 					-
 				</button>
-			</div>
+			</div >
 			<span style={{ fontSize: "0.95em", marginLeft: "4px" }}>{quantity}</span>
-		</div>
+		</div >
 	);
 }

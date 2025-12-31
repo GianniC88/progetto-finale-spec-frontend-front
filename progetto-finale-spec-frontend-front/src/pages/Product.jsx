@@ -54,8 +54,7 @@ export default function ListaProdotti() {
 									<th className="th-categoria">Categoria</th>
 									<th className="th-azioni text-center">Preferiti</th>
 									<th className="th-azioni">Carrello</th>
-									<th className="th-azioni">+ / -</th>
-									<th className="th-azioni">Compara</th>
+									<th className="th-azioni ps-4">+ / -</th>									<th className="th-azioni">Compara</th>
 								</tr>
 							</thead>
 							<tbody>
@@ -73,6 +72,6 @@ export default function ListaProdotti() {
 					</div>
 				</div>
 			</div>
-		</div>
+		</div >
 	);
 }
