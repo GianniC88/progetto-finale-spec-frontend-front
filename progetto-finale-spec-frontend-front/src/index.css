@@ -3,8 +3,25 @@
   padding: 0;
   box-sizing: border-box;
 }
+html,
 body {
+  height: 100%;
+}
+
+body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
   font-family: "Montserrat", Arial, sans-serif;
+}
+#root {
+  flex: 1 0 auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.footer-bgcolor {
+  flex-shrink: 0;
 }
 .prodotti-backgound {
   background-image: url("/freschi/mix peperoncini freschi super hot.png");
@@ -118,8 +135,9 @@ body {
   width: 100%;
 }
 .footer-bgcolor {
+  padding: 10px;
   background-color: #ff5722;
-  margin: 0 auto;
+  min-height: 150px;
 }
 .card-img img {
   width: 100%; /* imposta la larghezza desiderata */
@@ -155,6 +173,9 @@ body {
   align-items: center;
 }
 /* Stile per la card dettaglio prodotto */
+.detail-page {
+  background-color: #ff9800;
+}
 .card-detail {
   background: #fff;
   border-radius: 18px;
