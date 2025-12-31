@@ -34,15 +34,15 @@ export function GlobalProvider({ children }) {
 
 	const [cart, setCart] = useState(() => {
 		const saved = localStorage.getItem("cart");
-		return Array.isArray(saved ? JSON.parse(saved) : []) ? JSON.parse(saved) : [];
+		const parsed = saved ? JSON.parse(saved) : [];
+		return Array.isArray(parsed) ? parsed : [];
 	});
 
 	useEffect(() => {
 		localStorage.setItem("cart", JSON.stringify(cart));
 	}, [cart]);
 
-
-	const isInCart = id => cart.includes(id);
+	const isInCart = id => (Array.isArray(cart) ? cart.includes(id) : false);
 
 	const addToCart = id => {
 		setCart(list => [...list, id]);
@@ -63,7 +63,6 @@ export function GlobalProvider({ children }) {
 			return list;
 		});
 	};
-
 
 	const [compareList, setCompareList] = useState(() => {
 		const saved = localStorage.getItem("compareList");

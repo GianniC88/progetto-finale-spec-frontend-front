@@ -1,28 +1,31 @@
 import { useContext, useEffect, useState } from "react";
 import { GlobalContext } from "../context/GlobalContext";
 import CardDetail from "../assets/components/CardDetail";
-import FavoriteButton from "../assets/components/FavoriteButton";
 
 export default function Favorites() {
 	const { favoriteList } = useContext(GlobalContext);
-	const [dettagli, setDettagli] = useState([]);
+	const [prodotti, setProdotti] = useState([]);
 	const [loading, setLoading] = useState(true);
 
 	useEffect(() => {
 		const apiUrl = import.meta.env.VITE_API_URL;
-		if (favoriteList.length === 0) {
-			setDettagli([]);
+		const validIds = Array.isArray(favoriteList)
+			? favoriteList.filter(id => typeof id === "string" || typeof id === "number")
+			: [];
+		if (validIds.length === 0) {
+			setProdotti([]);
 			setLoading(false);
 			return;
 		}
 		Promise.all(
-			favoriteList.map(id =>
+			validIds.map(id =>
 				fetch(`${apiUrl}/products/${id}`)
-					.then(res => res.json())
-					.then(data => data.product || data)
+					.then(res => res.ok ? res.json() : null)
+					.then(data => (data && (data.product || data)) || null)
+					.catch(() => null)
 			)
 		).then(prodotti => {
-			setDettagli(prodotti);
+			setProdotti(prodotti.filter(Boolean));
 			setLoading(false);
 		});
 	}, [favoriteList]);
@@ -32,14 +35,13 @@ export default function Favorites() {
 			<h2>I tuoi preferiti</h2>
 			{loading ? (
 				<div>Caricamento...</div>
-			) : dettagli.length === 0 ? (
+			) : prodotti.length === 0 ? (
 				<div>La lista preferiti è vuota.</div>
 			) : (
 				<div className="row">
-					{dettagli.map(prodotto => (
+					{prodotti.map(prodotto => (
 						<div className="col-12 col-md-6 col-lg-4 mb-4" key={prodotto.id}>
 							<CardDetail prodotto={prodotto} />
-
 						</div>
 					))}
 				</div>

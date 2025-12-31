@@ -94,9 +94,9 @@ export default function Carrello() {
 										{prodotto.price ? `${prodotto.price} €` : "-"}
 									</td>
 									<td>
-										<td>
-											<ButtonAddRemove prodottoId={prodotto.id} quantity={cartCount[prodotto.id]} />
-										</td>
+
+										<ButtonAddRemove prodottoId={prodotto.id} quantity={cartCount[prodotto.id]} />
+
 									</td>
 									<td>
 										{prodotto.price

@@ -8,7 +8,7 @@ export default function FavoriteButton({ prodottoId, navbar }) {
 	// Versione per la navbar
 	if (navbar) {
 		return (
-			<Link to="/preferiti" className="nav-link position-relative" title="Vai ai preferiti">
+			<Link to="/favorites" className="nav-link position-relative" title="Vai ai preferiti">
 				<span
 					role="img"
 					aria-label="Preferiti"
