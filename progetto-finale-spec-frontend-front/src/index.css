@@ -122,10 +122,10 @@ th.product-compare-cell {
   border-radius: 12px;
   background: linear-gradient(135deg, #f8fafc 85%, #e0e7ef 100%);
   border: none;
-  background: transparent !important;
+  background: transparent;
 }
 .card-prodotti-lista .card-body {
-  background: transparent !important;
+  background: transparent;
 }
 .tabella-prodotti {
   border-radius: 10px;
@@ -479,15 +479,36 @@ th.product-compare-cell {
 
 @media (max-width: 1024px) {
   .custom-navbar {
-    border-bottom: none !important;
-    box-shadow: none !important;
-    padding-left: 0 !important;
-    padding-right: 0 !important;
+    border-bottom: none;
+    box-shadow: none;
+    padding-left: 0;
+    padding-right: 0;
   }
   .product-actions-cell {
-    padding-right: 4px !important;
-    padding-left: 4px !important;
+    padding-right: 4px;
+    padding-left: 4px;
     background: #f8f9fa;
     border-radius: 8px;
+  }
+}
+@media (max-width: 991.98px) {
+  .navbar-nav .nav-item.d-lg-none {
+    min-height: 48px; /* Altezza fissa per tutte le righe */
+    height: 48px;
+    text-align: center;
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+  .navbar-nav .nav-link {
+    padding-top: 8px;
+    padding-bottom: 8px;
+    font-size: 1rem;
+  }
+  .navbar-nav .nav-item.d-lg-none > .d-flex {
+    align-items: center;
+  }
+  .navbar {
+    box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px,
+      rgba(0, 0, 0, 0.23) 0px 6px 6px;
   }
 }
