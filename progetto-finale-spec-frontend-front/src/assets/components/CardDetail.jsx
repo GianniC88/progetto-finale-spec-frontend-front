@@ -50,7 +50,7 @@ const CardDetail = ({ prodotto }) => {
 				)}
 			</ul>
 			{/* Azioni fuori dalla lista */}
-			<div className="d-flex gap-4 mt-4 card-actions-fixed">
+			<div className="d-flex gap-4 mt-5 mb-5 card-actions-fixed">
 				<FavoriteButton prodottoId={prodotto.id} />
 				{isFavorite && isFavorite(prodotto.id) && (
 					<>

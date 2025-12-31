@@ -5,7 +5,7 @@ export default function ButtonAddRemove({ prodottoId, quantity }) {
 	const { addToCart, decreaseFromCart } = useContext(GlobalContext);
 
 	return (
-		<div style={{ display: "flex", flexDirection: "row", alignItems: "center", gap: "6px" }}>
+		<div className="d-flex justify-content-center align-items-center" style={{ gap: "6px" }}>
 			<div style={{ display: "flex", flexDirection: "column", gap: "2px", marginLeft: "20px" }}>
 				<button
 					className="btn btn-outline-secondary"
@@ -24,8 +24,8 @@ export default function ButtonAddRemove({ prodottoId, quantity }) {
 				>
 					-
 				</button>
-			</div >
+			</div>
 			<span style={{ fontSize: "0.95em", marginLeft: "4px" }}>{quantity}</span>
-		</div >
+		</div>
 	);
 }

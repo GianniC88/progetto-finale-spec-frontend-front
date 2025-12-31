@@ -127,6 +127,15 @@ th.product-compare-cell {
 .card-prodotti-lista .card-body {
   background: transparent;
 }
+.col-prezzo {
+  width: 90px;
+}
+.col-quantita {
+  width: 70px;
+}
+.col-subtotale {
+  width: 110px;
+}
 .tabella-prodotti {
   border-radius: 10px;
   overflow: hidden;
@@ -138,7 +147,17 @@ th.product-compare-cell {
 .tabella-prodotti thead {
   background: #f1f3f7;
 }
-
+.table th {
+  vertical-align: middle;
+  text-align: center;
+  padding-top: 18px;
+  padding-bottom: 18px;
+  font-size: 1.25em;
+}
+.table th:nth-child(2),
+.table td:nth-child(2) {
+  text-align: left;
+}
 /* ProductRow styles */
 .product-row {
   height: 60px;
@@ -318,10 +337,9 @@ th.product-compare-cell {
   height: 100;
 }
 .card-actions-fixed {
-  position: absolute;
-  left: 0;
+  left: 220px;
   right: 0;
-  bottom: 20px;
+  bottom: -40px;
   justify-content: center;
 }
 .card-detail {
