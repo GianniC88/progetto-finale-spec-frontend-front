@@ -3,6 +3,7 @@ import FavoriteButton from "./FavoriteButton";
 import CartButton from "./CartButton";
 import ButtonAddRemove from "./ButtonAddRemove";
 import { GlobalContext } from "../../context/GlobalContext";
+import CompareButton from "./CompareButton";
 
 const labels = {
 	title: "Titolo",
@@ -21,7 +22,7 @@ const CardDetail = ({ prodotto, showCheckbox = false, checked = false, onCheckbo
 
 	if (!prodotto) return <div>Nessun prodotto trovato.</div>;
 	return (
-		<div className="card-detail card-common" style={{ position: "relative" }}>
+		<div className="card-detail card-common " style={{ position: "relative" }}>
 			<h2>{prodotto.title}</h2>
 			{prodotto.image && (
 				<img
@@ -31,7 +32,7 @@ const CardDetail = ({ prodotto, showCheckbox = false, checked = false, onCheckbo
 					onClick={() => setModalImg(prodotto.image)}
 				/>
 			)}
-			<ul>
+			<ul className="card-detail-list">
 				<li><strong>{labels.title}:</strong> {prodotto.title}</li>
 				<li><strong>{labels.category}:</strong> {prodotto.category}</li>
 				<li><strong>{labels.price}:</strong> {prodotto.price ? prodotto.price + " €" : "-"}</li>
@@ -62,6 +63,7 @@ const CardDetail = ({ prodotto, showCheckbox = false, checked = false, onCheckbo
 					<>
 						<CartButton prodottoId={prodotto.id} />
 						<ButtonAddRemove prodottoId={prodotto.id} />
+						<CompareButton prodottoId={prodotto.id} />
 					</>
 				)}
 			</div>

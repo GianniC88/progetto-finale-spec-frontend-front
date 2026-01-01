@@ -8,7 +8,7 @@ export default function Card({ prodotto }) {
 			<div className="card-img">
 				<img src={prodotto.image} alt={prodotto.title} />
 			</div>
-			<h4>{prodotto.title}</h4>
+			<h1>{prodotto.title}</h1>
 			<ul className="caratteristiche-carosello">
 				<li><strong>Categoria:</strong> {prodotto.category || "-"}</li>
 				<li><strong>Prezzo:</strong> {prodotto.price ? prodotto.price + " €" : "-"}</li>

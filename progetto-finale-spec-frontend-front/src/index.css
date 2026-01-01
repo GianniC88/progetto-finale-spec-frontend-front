@@ -7,12 +7,24 @@ html,
 body {
   height: 100%;
 }
+#root {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
 
+main {
+  flex: 1;
+}
+.bordo {
+  border: 1px solid black;
+}
 body {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
   font-family: "Montserrat", Arial, sans-serif;
+  background-color: #ff9800;
 }
 #root {
   flex: 1 0 auto;
@@ -20,9 +32,6 @@ body {
   flex-direction: column;
 }
 
-.footer-bgcolor {
-  flex-shrink: 0;
-}
 .prodotti-backgound {
   background-image: url("/freschi/mix peperoncini freschi super hot.png");
   background-repeat: no-repeat;
@@ -296,9 +305,15 @@ th.product-compare-cell {
 .footer-bgcolor {
   padding: 10px;
   background-color: #ff5722;
-  min-height: 150px;
+  min-height: 149px;
   box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset,
     rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset;
+}
+.card-detail-list {
+  font-size: 0.95em;
+}
+.card-detail-list li {
+  margin-bottom: 2px;
 }
 .card-img img {
   width: 100%; /* imposta la larghezza desiderata */
@@ -312,7 +327,7 @@ th.product-compare-cell {
   background-image: url("/home.png");
   background-size: cover;
   background-position: center;
-  min-height: 550px;
+  min-height: 500px;
   width: 100%; /* Occupa tutta la larghezza del parent */
   color: #fff;
   text-shadow: 0 2px 8px #000;
@@ -327,20 +342,76 @@ th.product-compare-cell {
   border: 1px solid #ccc;
   border-radius: 8px;
   padding: 12px;
-  width: 250px;
+  width: 150px;
   background: #fafafa;
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 /* Stile per la card dettaglio prodotto */
+.carrello-modal-banner {
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #1976d2;
+  color: #fff;
+  padding: 12px 32px;
+  border-radius: 8px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+  font-size: 1.1rem;
+  z-index: 9999;
+  animation: fadeInOut 1.5s;
+}
+@keyframes fadeInOut {
+  0% {
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+.compare-modal-banner {
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #4caf50;
+  color: #fff;
+  padding: 12px 32px;
+  border-radius: 8px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+  font-size: 1.1rem;
+  z-index: 9999;
+  animation: fadeInOut 1.5s;
+}
+@keyframes fadeInOut {
+  0% {
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
 .detail-page {
   background-color: #ff9800;
   height: 100;
 }
 .card-actions-fixed {
   position: absolute;
-  left: 220px;
+  left: 200px;
   right: 0;
   bottom: 12px;
   justify-content: center;

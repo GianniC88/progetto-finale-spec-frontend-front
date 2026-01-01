@@ -26,7 +26,9 @@ export default function CompareButton({ prodottoId }) {
 				{isCompared && isCompared(prodottoId) ? "✔️" : "⇄"}
 			</button>
 			{msg && (
-				<span className="compare-msg">{msg}</span>
+				<div className="compare-modal-banner">
+					{msg}
+				</div>
 			)}
 		</>
 	);
