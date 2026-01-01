@@ -55,7 +55,7 @@ function Navbar() {
 							<Link className={`nav-link${location.pathname === "/" ? " active" : ""}`} to="/">Home</Link>
 						</li>
 						<li className="nav-item d-none d-lg-block">
-							<Link className={`nav-link${location.pathname === "/category/freschi" ? " active" : ""}`} to="/category/freschi">Prodotti</Link>
+							<Link className={`nav-link${location.pathname === "/category/freschi" ? " active" : ""}`} to="/products">Prodotti</Link>
 						</li>
 						<li className="nav-item d-none d-lg-block">
 							<Link className={`nav-link${location.pathname === "/compare" ? " active" : ""}`} to="/compare">Comparatore</Link>

@@ -16,7 +16,7 @@ function App() {
         <Routes>
           <Route element={<DefaultLayout />}>
             <Route path="/" element={<Home />} />
-            <Route path="/category/freschi" element={<Product />} />
+            <Route path="/products" element={<Product />} />
             <Route path="/products/:id" element={<Detail />} />
             <Route path="/compare" element={<Compare />} />
             <Route path="/favorites" element={<Favorites />} />

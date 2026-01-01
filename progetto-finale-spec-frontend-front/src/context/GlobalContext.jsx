@@ -95,6 +95,7 @@ export function GlobalProvider({ children }) {
 			removeFromCart,
 			decreaseFromCart,
 			compareList,
+			setCompareList,
 			addToCompare,
 			removeFromCompare,
 			isCompared,

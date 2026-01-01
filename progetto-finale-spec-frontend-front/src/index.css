@@ -297,6 +297,8 @@ th.product-compare-cell {
   padding: 10px;
   background-color: #ff5722;
   min-height: 150px;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset,
+    rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset;
 }
 .card-img img {
   width: 100%; /* imposta la larghezza desiderata */
@@ -337,10 +339,20 @@ th.product-compare-cell {
   height: 100;
 }
 .card-actions-fixed {
+  position: absolute;
   left: 220px;
   right: 0;
-  bottom: -40px;
+  bottom: 12px;
   justify-content: center;
+}
+.card-checkbox {
+  position: absolute;
+  bottom: 12px;
+  left: 15px;
+  background: rgba(255, 255, 255, 0.8);
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-size: 1rem;
 }
 .card-detail {
   background: #fff;

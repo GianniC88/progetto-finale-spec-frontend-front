@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import FavoriteButton from "./FavoriteButton";
 import CartButton from "./CartButton";
 import ButtonAddRemove from "./ButtonAddRemove";
@@ -15,18 +15,20 @@ const labels = {
 	images: "Immagini aggiuntive"
 };
 
-const CardDetail = ({ prodotto }) => {
+const CardDetail = ({ prodotto, showCheckbox = false, checked = false, onCheckboxChange }) => {
 	const { isFavorite } = useContext(GlobalContext);
+	const [modalImg, setModalImg] = useState(null);
 
 	if (!prodotto) return <div>Nessun prodotto trovato.</div>;
 	return (
-		<div className="card-detail card-common">
+		<div className="card-detail card-common" style={{ position: "relative" }}>
 			<h2>{prodotto.title}</h2>
 			{prodotto.image && (
 				<img
 					src={prodotto.image}
 					alt={prodotto.title || "Immagine prodotto"}
-					style={{ maxWidth: "300px", marginBottom: "1rem" }}
+					style={{ maxWidth: "300px", marginBottom: "1rem", cursor: "pointer" }}
+					onClick={() => setModalImg(prodotto.image)}
 				/>
 			)}
 			<ul>
@@ -42,15 +44,19 @@ const CardDetail = ({ prodotto }) => {
 						<ul>
 							{prodotto.images.map((img, idx) => (
 								<li key={idx}>
-									<img src={img} alt={`Immagine aggiuntiva ${idx + 1}`} style={{ maxWidth: "100px", margin: "5px" }} />
+									<img
+										src={img}
+										alt={`Immagine aggiuntiva ${idx + 1}`}
+										style={{ maxWidth: "100px", margin: "5px", cursor: "pointer" }}
+										onClick={() => setModalImg(img)}
+									/>
 								</li>
 							))}
 						</ul>
 					</li>
 				)}
 			</ul>
-			{/* Azioni fuori dalla lista */}
-			<div className="d-flex gap-4 mt-5 mb-5 card-actions-fixed">
+			<div className="d-flex gap-4 mt-5 card-actions-fixed">
 				<FavoriteButton prodottoId={prodotto.id} />
 				{isFavorite && isFavorite(prodotto.id) && (
 					<>
@@ -59,7 +65,39 @@ const CardDetail = ({ prodotto }) => {
 					</>
 				)}
 			</div>
-
+			{/* Checkbox solo se richiesto */}
+			{showCheckbox && (
+				<div className="card-checkbox">
+					<input
+						type="checkbox"
+						checked={checked}
+						onChange={onCheckboxChange}
+					/> Seleziona
+				</div>
+			)}
+			{/* Modale per immagine ingrandita */}
+			{modalImg && (
+				<div
+					className="modal-backdrop"
+					style={{
+						position: "fixed",
+						top: 0, left: 0, right: 0, bottom: 0,
+						background: "rgba(0,0,0,0.7)",
+						display: "flex",
+						alignItems: "center",
+						justifyContent: "center",
+						zIndex: 9999
+					}}
+					onClick={() => setModalImg(null)}
+				>
+					<img
+						src={modalImg}
+						alt="Immagine ingrandita"
+						style={{ maxHeight: "80vh", maxWidth: "90vw", borderRadius: "8px", boxShadow: "0 0 20px #000" }}
+						onClick={e => e.stopPropagation()}
+					/>
+				</div>
+			)}
 		</div>
 	);
 };
