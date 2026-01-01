@@ -41,6 +41,10 @@ body {
   font-size: 3rem;
 }
 /* Bottone carrello generico */
+.btn-cart {
+  min-width: 150px;
+}
+
 .cart-btn {
   background: none;
   border: none;

@@ -1,11 +1,15 @@
 import { useContext, useEffect, useState } from "react";
 import { GlobalContext } from "../context/GlobalContext";
 import CardDetail from "../assets/components/CardDetail";
+import { useClearListMessage } from "../assets/customHook/useClearListMessage";
 
 export default function Favorites() {
-  const { favoriteList } = useContext(GlobalContext);
+  const { favoriteList, clearFavorites } = useContext(GlobalContext);
   const [prodotti, setProdotti] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [msg, clearFavoritesWithMsg] = useClearListMessage(
+    "Preferiti svuotati!"
+  );
 
   useEffect(() => {
     const apiUrl = import.meta.env.VITE_API_URL;
@@ -52,6 +56,16 @@ export default function Favorites() {
             ))}
           </div>
         )}
+        {favoriteList.length > 0 && (
+          <button
+            className="btn btn-warning mt-3"
+            onClick={() => clearFavoritesWithMsg(clearFavorites)}
+            disabled={favoriteList.length === 0}
+          >
+            Pulisci preferiti
+          </button>
+        )}
+        {msg && <div className="alert alert-success mt-2">{msg}</div>}
       </div>
     </div>
   );
