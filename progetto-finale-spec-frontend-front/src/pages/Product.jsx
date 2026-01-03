@@ -5,12 +5,27 @@ import useDebounce from "../assets/customHook/useDebounce";
 
 export default function ListaProdotti() {
   const [prodotti, setProdotti] = useState([]);
+  const [allCategorie, setAllCategorie] = useState([]);
   const [search, setSearch] = useState("");
-  const [category, setCategory] = useState("");
+  const [category, setCategory] = useState(() => {
+    return localStorage.getItem("selectedCategory") || "";
+  });
   const [sort, setSort] = useState("title-asc");
-  const [categorie, setCategorie] = useState([]);
 
-  const debouncedSearch = useDebounce(search, 400); // debounce qui
+  const debouncedSearch = useDebounce(search, 400);
+
+  useEffect(() => {
+    const apiUrl = import.meta.env.VITE_API_URL;
+    // Prendi sempre TUTTI i prodotti per calcolare le categorie disponibili
+    fetch(`${apiUrl}/products`)
+      .then((res) => res.json())
+      .then((data) => {
+        const all = data.products || data;
+        setAllCategorie(
+          Array.from(new Set(all.map((p) => p.category))).filter(Boolean)
+        );
+      });
+  }, []);
 
   useEffect(() => {
     const apiUrl = import.meta.env.VITE_API_URL;
@@ -20,10 +35,12 @@ export default function ListaProdotti() {
     if (category) url += `category=${encodeURIComponent(category)}&`;
 
     fetch(url)
-      .then((res) => res.json())
+      .then((res) => {
+        if (!res.ok) throw new Error("Errore nella risposta");
+        return res.json();
+      })
       .then((data) => {
         const all = data.products || data;
-        setCategorie([...new Set(all.map((p) => p.category))]);
         let ordinati = [...all];
         if (sort === "title-asc")
           ordinati.sort((a, b) => a.title.localeCompare(b.title));
@@ -34,6 +51,10 @@ export default function ListaProdotti() {
         if (sort === "category-desc")
           ordinati.sort((a, b) => b.category.localeCompare(a.category));
         setProdotti(ordinati);
+      })
+      .catch((error) => {
+        console.error("Errore fetch prodotti:", error);
+        setProdotti([]); // oppure mostra un messaggio di errore
       });
   }, [debouncedSearch, category, sort]);
 
@@ -50,7 +71,7 @@ export default function ListaProdotti() {
           setCategory={setCategory}
           sort={sort}
           setSort={setSort}
-          categorie={categorie}
+          categorie={allCategorie}
         />
         <div className="card shadow-sm card-prodotti-lista">
           <div className="card-body p-0">

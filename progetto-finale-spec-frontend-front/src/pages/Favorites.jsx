@@ -57,15 +57,17 @@ export default function Favorites() {
           </div>
         )}
         {favoriteList.length > 0 && (
-          <button
-            className="btn btn-warning mt-3"
-            onClick={() => clearFavoritesWithMsg(clearFavorites)}
-            disabled={favoriteList.length === 0}
-          >
-            Pulisci preferiti
-          </button>
+          <div className="mt-4 text-center">
+            <button
+              className="btn btn-danger w-auto"
+              onClick={() => clearFavoritesWithMsg(clearFavorites)}
+              disabled={favoriteList.length === 0}
+            >
+              Elimina preferiti
+            </button>
+          </div>
         )}
-        {msg && <div className="alert alert-success mt-2">{msg}</div>}
+        {msg && <div className="alert alert-success mt-4">{msg}</div>}
       </div>
     </div>
   );
