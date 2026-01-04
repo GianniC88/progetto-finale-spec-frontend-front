@@ -75,34 +75,41 @@ export default function ListaProdotti() {
         />
         <div className="card shadow-sm card-prodotti-lista">
           <div className="card-body p-0">
-            <table className="table mb-0 align-middle tabella-prodotti">
-              {prodotti.length > 0 && (
-                <thead>
-                  <tr>
-                    <th className="th-titolo">Titolo</th>
-                    <th className="th-categoria">Categoria</th>
-                    <th className="th-azioni text-center">Preferiti</th>
-                    <th className="th-azioni">Carrello</th>
-                    <th className="th-azioni ps-4">+ / -</th>
-                    <th className="th-azioni">Compara</th>
-                  </tr>
-                </thead>
-              )}
-              <tbody>
-                {prodotti.length === 0 ? (
-                  <tr>
-                    <td colSpan={6} className="text-center py-5 text-secondary">
-                      <div style={{ fontSize: "2em" }}>🔍</div>
-                      <div className="mt-2">Nessun prodotto trovato.</div>
-                    </td>
-                  </tr>
-                ) : (
-                  prodotti.map((prodotto) => (
-                    <ProductRow prodotto={prodotto} key={prodotto.id} />
-                  ))
+            <div className="table-responsive">
+              <table className="table mb-0 align-middle tabella-prodotti">
+                {prodotti.length > 0 && (
+                  <thead>
+                    <tr>
+                      <th className="th-titolo">Titolo</th>
+                      <th className="th-categoria">Categoria</th>
+                      <th className="th-azioni th-preferiti text-center">
+                        Preferiti
+                      </th>
+                      <th className="th-azioni th-carrello">Carrello</th>
+                      <th className="th-azioni th-addremove ps-4">+ / -</th>
+                      <th className="th-azioni th-compara">Compara</th>
+                    </tr>
+                  </thead>
                 )}
-              </tbody>
-            </table>
+                <tbody>
+                  {prodotti.length === 0 ? (
+                    <tr>
+                      <td
+                        colSpan={6}
+                        className="text-center py-5 text-secondary"
+                      >
+                        <div style={{ fontSize: "2em" }}>🔍</div>
+                        <div className="mt-2">Nessun prodotto trovato.</div>
+                      </td>
+                    </tr>
+                  ) : (
+                    prodotti.map((prodotto) => (
+                      <ProductRow prodotto={prodotto} key={prodotto.id} />
+                    ))
+                  )}
+                </tbody>
+              </table>
+            </div>
           </div>
         </div>
       </div>
