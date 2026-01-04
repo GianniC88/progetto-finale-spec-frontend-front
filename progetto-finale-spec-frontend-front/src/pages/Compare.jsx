@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState } from "react";
 import { GlobalContext } from "../context/GlobalContext";
-import CompareModal from "../assets/components/CompareModale";
+import CompareModale from "../assets/components/CompareModale";
 import CardDetail from "../assets/components/CardDetail";
 import { useNavigate } from "react-router-dom";
 
@@ -123,7 +123,7 @@ export default function Compare() {
               >
                 Svuota comparatore
               </button>
-              <CompareModal
+              <CompareModale
                 show={showModal}
                 onClose={() => setShowModal(false)}
                 prodotti={prodotti.filter((p) => selected[p.id])}

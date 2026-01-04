@@ -1,8 +1,22 @@
 import { useSpicinessPeppers } from "../customHook/useSpicinessPeppers";
+import { useIsMobile } from "../customHook/useIsMobile";
+import CompareModalMobile from "./CompareModalMobile";
 import React from "react";
 import Modale from "./Modale";
 
 export default function CompareModal({ show, onClose, prodotti }) {
+  const isMobile = useIsMobile(768);
+
+  if (!show) return null;
+
+  if (isMobile) {
+    // Mostra la versione mobile sotto i 768px
+    return (
+      <CompareModalMobile show={show} onClose={onClose} prodotti={prodotti} />
+    );
+  }
+
+  // Versione desktop (tabella completa)
   const content = (
     <table className="table table-bordered">
       <thead>
