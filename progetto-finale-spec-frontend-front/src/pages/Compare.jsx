@@ -9,9 +9,16 @@ export default function Compare() {
     useContext(GlobalContext);
   const [prodotti, setProdotti] = useState([]);
   const [showModal, setShowModal] = useState(false);
-  const [selected, setSelected] = useState({});
+  const [selected, setSelected] = useState(() => {
+    const saved = localStorage.getItem("compareSelected");
+    return saved ? JSON.parse(saved) : {};
+  });
   const [showSuccess, setShowSuccess] = useState(false);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    localStorage.setItem("compareSelected", JSON.stringify(selected));
+  }, [selected]);
 
   useEffect(() => {
     const apiUrl = import.meta.env.VITE_API_URL;
