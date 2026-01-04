@@ -619,8 +619,26 @@ th.product-compare-cell {
   color: green;
   font-size: 0.85em;
 }
+.main-content {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 24px 12px 32px 12px;
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 18px;
+  box-shadow: 0 4px 18px rgba(255, 87, 34, 0.08);
+}
 
+.carrello-mobile-card {
+}
 @media (max-width: 1024px) {
+  .azioni-comparatore {
+  }
+  .cart-navbar-icon,
+  .favorite-navbar-icon {
+    font-size: 1.3em !important;
+    width: 28px !important;
+    height: 28px !important;
+  }
   .custom-navbar {
     border-bottom: none;
     box-shadow: none;
@@ -634,6 +652,41 @@ th.product-compare-cell {
     border-radius: 8px;
   }
 }
+
+@media (max-width: 768px) {
+  .main-content {
+    max-width: 100vw;
+    padding: 8px 0 16px 0;
+    border-radius: 0;
+  }
+  .table-responsive-mobile {
+    width: 100vw;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    margin-left: -12px;
+    margin-right: -12px;
+  }
+  .table {
+    min-width: 600px;
+    width: 100%;
+  }
+  .table th,
+  .table td {
+    font-size: 0.95em;
+    padding: 4px 2px;
+    white-space: nowrap;
+  }
+  .table img {
+    width: 28px !important;
+    height: 28px !important;
+  }
+  .btn-cart {
+    min-width: 90px;
+    font-size: 0.95em;
+    padding: 6px 8px;
+  }
+}
+
 @media (max-width: 991.98px) {
   .navbar-nav .nav-item.d-lg-none {
     min-height: 48px; /* Altezza fissa per tutte le righe */
@@ -653,5 +706,32 @@ th.product-compare-cell {
   .navbar {
     box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px,
       rgba(0, 0, 0, 0.23) 0px 6px 6px;
+  }
+}
+
+@media (max-width: 600px) {
+  .main-content table {
+    min-width: 600px;
+    display: block;
+    overflow-x: auto;
+    width: 100%;
+  }
+  .main-content .table-responsive-mobile {
+    overflow-x: auto;
+    width: 100%;
+  }
+  .main-content th,
+  .main-content td {
+    font-size: 0.95em;
+    padding: 4px 2px;
+    white-space: nowrap;
+  }
+  .table-responsive-mobile {
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+  .table {
+    min-width: 600px;
   }
 }

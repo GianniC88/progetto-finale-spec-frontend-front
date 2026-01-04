@@ -93,22 +93,22 @@ export default function Compare() {
                 </div>
               ))}
             </div>
-            <div className="text-center  mt-4">
+            <div className=" container azioni-comparatore text-center  mt-4">
               <button
-                className="btn btn-success text-white me-2"
+                className="btn btn-success mb-2 text-white me-2"
                 onClick={() => setShowModal(true)}
                 disabled={Object.values(selected).filter(Boolean).length < 2}
               >
                 Compara prodotti selezionati
               </button>
               <button
-                className="btn btn-primary text-white me-2"
+                className="btn btn-primary  mb-2 text-white me-2"
                 onClick={() => navigate("/products")}
               >
                 Aggiungi prodotto
               </button>
               <button
-                className="btn btn-danger text-white me-2"
+                className="btn btn-danger mb-2 text-white me-2"
                 onClick={handleDeleteSelected}
                 disabled={Object.values(selected).filter(Boolean).length === 0}
               >

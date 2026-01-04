@@ -1,3 +1,5 @@
+import { useReducer } from "react";
+
 function selectedReducer(state, action) {
   switch (action.type) {
     case "toggle":
@@ -7,4 +9,8 @@ function selectedReducer(state, action) {
     default:
       return state;
   }
+}
+
+export function useSelectedReducer() {
+  return useReducer(selectedReducer, {});
 }
