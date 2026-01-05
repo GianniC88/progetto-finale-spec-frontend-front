@@ -127,12 +127,13 @@ function Navbar() {
             </li>
           </ul>
           {/* Emoticon solo desktop */}
-          <ul className="navbar-nav mb-2 mb-lg-0 ms-auto d-none d-lg-flex flex-row align-items-center">
+          {/* NAVBAR DESKTOP */}
+          <ul className="navbar-nav d-none d-lg-flex flex-row align-items-center">
             <li className="nav-item me-2">
-              <FavoriteButton navbar />
+              <FavoriteButton navbar className="navbar-icon" />
             </li>
             <li className="nav-item">
-              <CartButton />
+              <CartButton className="navbar-icon" />
             </li>
           </ul>
         </div>

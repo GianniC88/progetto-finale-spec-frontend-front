@@ -1,4 +1,5 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
+import { GlobalContext } from "../context/GlobalContext";
 import ProductRow from "../assets/components/ProductRow";
 import ProductFilters from "../assets/components/ProductFilters";
 import useDebounce from "../assets/customHook/useDebounce";
@@ -13,6 +14,7 @@ export default function ListaProdotti() {
   const [sort, setSort] = useState("title-asc");
 
   const debouncedSearch = useDebounce(search, 400);
+  const { clearFavorites, clearCart, clearCompare } = useContext(GlobalContext);
 
   useEffect(() => {
     const apiUrl = import.meta.env.VITE_API_URL;
@@ -58,21 +60,52 @@ export default function ListaProdotti() {
       });
   }, [debouncedSearch, category, sort]);
 
+  const handleClearAll = () => {
+    setSearch("");
+    setCategory("");
+    setSort("title-asc");
+    clearFavorites();
+    clearCart();
+    clearCompare();
+  };
+
   return (
     <div className="container p-4">
       <div className="prodotti-section">
         <h1 className="fw-bold mb-3 text-center titolo-prodotti">
           Lista Prodotti
         </h1>
-        <ProductFilters
-          search={search}
-          setSearch={setSearch}
-          category={category}
-          setCategory={setCategory}
-          sort={sort}
-          setSort={setSort}
-          categorie={allCategorie}
-        />
+        <div className="d-flex justify-content-center  gap-3">
+          <ProductFilters
+            search={search}
+            setSearch={setSearch}
+            category={category}
+            setCategory={setCategory}
+            sort={sort}
+            setSort={setSort}
+            categorie={allCategorie}
+          />
+          <button
+            className="btn btn-warning mb-3 d-none d-md-block"
+            style={{ position: "absolute", right: 20, top: 100 }}
+            onClick={handleClearAll}
+          >
+            Svuota <br />
+            selezioni
+          </button>
+          <button
+            className="btn btn-warning btn-sm mb-3 d-block d-md-none"
+            style={{
+              position: "absolute",
+              right: 20,
+              top: 100,
+              fontSize: "0.85em",
+            }}
+            onClick={handleClearAll}
+          >
+            Svuota
+          </button>
+        </div>
         <div className="card shadow-sm card-prodotti-lista">
           <div className="card-body p-0">
             <div className="table-responsive">
@@ -87,7 +120,12 @@ export default function ListaProdotti() {
                       </th>
                       <th className="th-azioni th-carrello">Carrello</th>
                       <th className="th-azioni th-addremove ps-4">+ / -</th>
-                      <th className="th-azioni th-compara">Compara</th>
+                      <th
+                        className="th-azioni th-compara"
+                        style={{ paddingRight: "10px" }}
+                      >
+                        Compara
+                      </th>{" "}
                     </tr>
                   </thead>
                 )}

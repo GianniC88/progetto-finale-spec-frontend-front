@@ -15,7 +15,7 @@ export default function ProductFilters({
   }, [category]);
 
   return (
-    <div className="mb-2 d-flex gap-3 flex-wrap justify-content-center product-filters">
+    <div className="mb-5 d-flex gap-3 flex-wrap justify-content-center product-filters">
       <input
         type="text"
         placeholder="Cerca per titolo..."

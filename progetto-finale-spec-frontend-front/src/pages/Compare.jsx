@@ -122,7 +122,7 @@ export default function Compare() {
                 Elimina selezionati
               </button>
               <button
-                className="btn btn-danger text-white me-2"
+                className="btn btn-danger mb-2 text-white me-2"
                 onClick={() => {
                   setCompareList([]);
                   setSelected({});
