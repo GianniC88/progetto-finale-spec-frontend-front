@@ -37,7 +37,7 @@ const CardDetail = ({
           onClick={() => setModalImg(prodotto.image)}
         />
       )}
-      <ul className="card-detail-list mb-4">
+      <ul className="card-detail-list mb-5">
         <li>
           <strong>{labels.title}:</strong> {prodotto.title}
         </li>
@@ -80,7 +80,7 @@ const CardDetail = ({
           </li>
         )}
       </ul>
-      <div className="d-flex gap-1  card-actions-fixed">
+      <div className="d-flex card-actions-fixed">
         <FavoriteButton prodottoId={prodotto.id} />
         {isFavorite && isFavorite(prodotto.id) && (
           <>

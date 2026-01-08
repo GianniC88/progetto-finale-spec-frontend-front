@@ -3,11 +3,11 @@ import { GlobalContext } from "../context/GlobalContext";
 import CompareModale from "../assets/components/CompareModale";
 import CardDetail from "../assets/components/CardDetail";
 import { useNavigate } from "react-router-dom";
+import useFetchCompareProducts from "../assets/customHook/useFetchCompareProducts";
 
 export default function Compare() {
   const { compareList, setCompareList, removeFromCompare } =
     useContext(GlobalContext);
-  const [prodotti, setProdotti] = useState([]);
   const [showModal, setShowModal] = useState(false);
   const [selected, setSelected] = useState(() => {
     const saved = localStorage.getItem("compareSelected");
@@ -19,27 +19,7 @@ export default function Compare() {
   useEffect(() => {
     localStorage.setItem("compareSelected", JSON.stringify(selected));
   }, [selected]);
-
-  useEffect(() => {
-    const apiUrl = import.meta.env.VITE_API_URL;
-    const validIds = Array.isArray(compareList)
-      ? compareList.filter(
-          (id) => typeof id === "string" || typeof id === "number"
-        )
-      : [];
-    if (validIds.length === 0) {
-      setProdotti([]);
-      return;
-    }
-    Promise.all(
-      validIds.map((id) =>
-        fetch(`${apiUrl}/products/${id}`)
-          .then((res) => (res.ok ? res.json() : null))
-          .then((data) => (data && (data.product || data)) || null)
-          .catch(() => null)
-      )
-    ).then((prodotti) => setProdotti(prodotti.filter(Boolean)));
-  }, [compareList]);
+  const prodotti = useFetchCompareProducts(compareList);
 
   // Quando compareList cambia (dopo eliminazione), azzera selected e il messaggio di successo
   useEffect(() => {

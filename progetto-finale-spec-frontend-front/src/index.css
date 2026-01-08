@@ -233,6 +233,9 @@ th.product-compare-cell {
 .card-detail-list {
   font-size: 0.95em;
 }
+.card-actions-fixed {
+  gap: 15px;
+}
 .card-detail-list li {
   margin-bottom: 2px;
 }
@@ -536,6 +539,9 @@ th.product-compare-cell {
     width: 28px;
     height: 28px;
   }
+  .card-actions-fixed {
+    gap: 10px;
+  }
   .custom-navbar {
     border-bottom: none;
     box-shadow: none;
@@ -566,6 +572,18 @@ th.product-compare-cell {
   .navbar {
     box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px,
       rgba(0, 0, 0, 0.23) 0px 6px 6px;
+  }
+  .cart-badge {
+    position: absolute;
+    top: -3px;
+    right: -15px;
+    background: #ff9800;
+    color: #fff;
+    border-radius: 50%;
+    font-size: 0.6em;
+    padding: 1px 5px;
+    font-weight: bold;
+    z-index: 1;
   }
 }
 @media (max-width: 770px) {
@@ -616,6 +634,21 @@ th.product-compare-cell {
     padding-right: 0;
     word-break: break-word;
     white-space: normal;
+  }
+  .cart-badge {
+    position: absolute;
+    top: -15px;
+    right: -20px;
+    background: #ff9800;
+    color: #fff;
+    border-radius: 50%;
+    font-size: 0.5em;
+    padding: 2px 10px;
+    font-weight: bold;
+    z-index: 1;
+  }
+  .card-actions-fixed {
+    gap: 10px;
   }
 }
 /* --- VERSIONE EXTRA MOBILE --- */

@@ -2,39 +2,15 @@ import { useContext, useEffect, useState } from "react";
 import { GlobalContext } from "../context/GlobalContext";
 import CardDetail from "../assets/components/CardDetail";
 import { useClearListMessage } from "../assets/customHook/useClearListMessage";
+import useFetchFavorites from "../assets/customHook/useFetchFavorites";
 
 export default function Favorites() {
   const { favoriteList, clearFavorites } = useContext(GlobalContext);
-  const [prodotti, setProdotti] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const { prodotti, loading } = useFetchFavorites(favoriteList);
+
   const [msg, clearFavoritesWithMsg] = useClearListMessage(
     "Preferiti svuotati!"
   );
-
-  useEffect(() => {
-    const apiUrl = import.meta.env.VITE_API_URL;
-    const validIds = Array.isArray(favoriteList)
-      ? favoriteList.filter(
-          (id) => typeof id === "string" || typeof id === "number"
-        )
-      : [];
-    if (validIds.length === 0) {
-      setProdotti([]);
-      setLoading(false);
-      return;
-    }
-    Promise.all(
-      validIds.map((id) =>
-        fetch(`${apiUrl}/products/${id}`)
-          .then((res) => (res.ok ? res.json() : null))
-          .then((data) => (data && (data.product || data)) || null)
-          .catch(() => null)
-      )
-    ).then((prodotti) => {
-      setProdotti(prodotti.filter(Boolean));
-      setLoading(false);
-    });
-  }, [favoriteList]);
 
   return (
     <div className="container my-4">

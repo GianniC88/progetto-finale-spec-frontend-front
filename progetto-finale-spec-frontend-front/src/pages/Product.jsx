@@ -1,12 +1,13 @@
-import { useEffect, useState, useContext } from "react";
+import { useEffect, useState, useContext, useMemo } from "react";
 import { GlobalContext } from "../context/GlobalContext";
 import ProductRow from "../assets/components/ProductRow";
 import ProductFilters from "../assets/components/ProductFilters";
 import useDebounce from "../assets/customHook/useDebounce";
+import useFetchProdotti from "../assets/customHook/useFetchProduct";
+import useFetchCategorie from "../assets/customHook/useFetchCategorie";
+import useOrdinaProdotti from "../assets/customHook/useOrdinaProdotti";
 
 export default function ListaProdotti() {
-  const [prodotti, setProdotti] = useState([]);
-  const [allCategorie, setAllCategorie] = useState([]);
   const [search, setSearch] = useState("");
   const [category, setCategory] = useState(() => {
     return localStorage.getItem("selectedCategory") || "";
@@ -15,50 +16,10 @@ export default function ListaProdotti() {
 
   const debouncedSearch = useDebounce(search, 400);
   const { clearFavorites, clearCart, clearCompare } = useContext(GlobalContext);
+  const prodotti = useFetchProdotti(debouncedSearch, category, sort);
+  const prodottiOrdinati = useOrdinaProdotti(prodotti, sort);
 
-  useEffect(() => {
-    const apiUrl = import.meta.env.VITE_API_URL;
-    // Prendi sempre TUTTI i prodotti per calcolare le categorie disponibili
-    fetch(`${apiUrl}/products`)
-      .then((res) => res.json())
-      .then((data) => {
-        const all = data.products || data;
-        setAllCategorie(
-          Array.from(new Set(all.map((p) => p.category))).filter(Boolean)
-        );
-      });
-  }, []);
-
-  useEffect(() => {
-    const apiUrl = import.meta.env.VITE_API_URL;
-    let url = `${apiUrl}/products?`;
-    if (debouncedSearch)
-      url += `search=${encodeURIComponent(debouncedSearch)}&`;
-    if (category) url += `category=${encodeURIComponent(category)}&`;
-
-    fetch(url)
-      .then((res) => {
-        if (!res.ok) throw new Error("Errore nella risposta");
-        return res.json();
-      })
-      .then((data) => {
-        const all = data.products || data;
-        let ordinati = [...all];
-        if (sort === "title-asc")
-          ordinati.sort((a, b) => a.title.localeCompare(b.title));
-        if (sort === "title-desc")
-          ordinati.sort((a, b) => b.title.localeCompare(a.title));
-        if (sort === "category-asc")
-          ordinati.sort((a, b) => a.category.localeCompare(b.category));
-        if (sort === "category-desc")
-          ordinati.sort((a, b) => b.category.localeCompare(a.category));
-        setProdotti(ordinati);
-      })
-      .catch((error) => {
-        console.error("Errore fetch prodotti:", error);
-        setProdotti([]); // oppure mostra un messaggio di errore
-      });
-  }, [debouncedSearch, category, sort]);
+  const allCategorie = useFetchCategorie();
 
   const handleClearAll = () => {
     setSearch("");
@@ -125,12 +86,12 @@ export default function ListaProdotti() {
                         style={{ paddingRight: "10px" }}
                       >
                         Compara
-                      </th>{" "}
+                      </th>
                     </tr>
                   </thead>
                 )}
                 <tbody>
-                  {prodotti.length === 0 ? (
+                  {prodottiOrdinati.length === 0 ? (
                     <tr>
                       <td
                         colSpan={6}
@@ -141,7 +102,7 @@ export default function ListaProdotti() {
                       </td>
                     </tr>
                   ) : (
-                    prodotti.map((prodotto) => (
+                    prodottiOrdinati.map((prodotto) => (
                       <ProductRow prodotto={prodotto} key={prodotto.id} />
                     ))
                   )}

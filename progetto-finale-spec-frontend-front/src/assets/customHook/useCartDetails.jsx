@@ -12,16 +12,33 @@ export function useCartDetails(cart) {
       return;
     }
     const uniqueIds = [...new Set(cart)];
-    Promise.all(
-      uniqueIds.map((id) =>
-        fetch(`${apiUrl}/products/${id}`)
-          .then((res) => res.json())
-          .then((data) => data.product || data)
-      )
-    ).then((prodotti) => {
-      setDettagli(prodotti);
-      setLoading(false);
-    });
+
+    const fetchDetails = async () => {
+      try {
+        const prodotti = await Promise.all(
+          uniqueIds.map(async (id) => {
+            try {
+              const res = await fetch(`${apiUrl}/products/${id}`);
+              if (!res.ok) {
+                throw new Error(`Errore HTTP prodotto: ${res.status}`);
+              }
+              const data = await res.json();
+              return data.product || data;
+            } catch {
+              return null;
+            }
+          })
+        );
+        setDettagli(prodotti.filter(Boolean));
+      } catch (error) {
+        setDettagli([]);
+        console.error("Errore nel caricamento dei dettagli carrello:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchDetails();
   }, [cart]);
 
   return { dettagli, loading };
