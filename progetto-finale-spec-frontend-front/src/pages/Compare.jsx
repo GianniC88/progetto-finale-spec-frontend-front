@@ -3,7 +3,7 @@ import { GlobalContext } from "../context/GlobalContext";
 import CompareModale from "../assets/components/CompareModale";
 import CardDetail from "../assets/components/CardDetail";
 import { useNavigate } from "react-router-dom";
-import useFetchCompareProducts from "../assets/customHook/useFetchCompareProducts";
+import useFetchCompareProducts from "../assets/customHook/compare/useFetchCompareProducts";
 
 export default function Compare() {
   const { compareList, setCompareList, removeFromCompare } =

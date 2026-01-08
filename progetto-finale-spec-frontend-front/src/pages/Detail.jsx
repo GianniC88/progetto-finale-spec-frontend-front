@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import CardDetail from "../assets/components/CardDetail";
-import useFetchDetail from "../assets/customHook/useFetchDetail";
+import useFetchDetail from "../assets/customHook/detail/useFetchDetail";
 
 const Detail = () => {
   const { id } = useParams();

@@ -5,7 +5,7 @@ import FavoriteButton from "./FavoriteButton";
 import CartButton from "./CartButton";
 import ButtonAddRemove from "./ButtonAddRemove";
 import CompareButton from "./CompareButton";
-import { useActionMessage } from "../customHook/useActionMessage";
+import { useActionMessage } from "../customHook/utils/useActionMessage";
 
 export default function ProductRow({ prodotto }) {
   const { addToCompare, isCompared } = useContext(GlobalContext);

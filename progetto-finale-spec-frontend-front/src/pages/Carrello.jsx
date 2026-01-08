@@ -1,11 +1,11 @@
 import { useContext, useReducer, useState, useEffect } from "react";
 import { GlobalContext } from "../context/GlobalContext";
 import ButtonAddRemove from "../assets/components/ButtonAddRemove";
-import { useCartDetails } from "../assets/customHook/useCartDetails";
-import { useCartCount } from "../assets/customHook/useCartCount";
-import { useActionMessage } from "../assets/customHook/useActionMessage";
-import { useIsMobile } from "../assets/customHook/useIsMobile";
-import { useSelectedReducer } from "../assets/customHook/useSelectedReduce";
+import { useCartDetails } from "../assets/customHook/cart/useCartDetails";
+import { useCartCount } from "../assets/customHook/cart/useCartCount";
+import { useActionMessage } from "../assets/customHook/utils/useActionMessage";
+import { useIsMobile } from "../assets/customHook/utils/useIsMobile";
+import { useSelectedReducer } from "../assets/customHook/cart/useSelectedReduce";
 import CarrelloMobileList from "../assets/components/CarrelloMobileList";
 
 export default function Carrello() {

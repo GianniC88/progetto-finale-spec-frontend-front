@@ -2,10 +2,10 @@ import { useEffect, useState, useContext, useMemo } from "react";
 import { GlobalContext } from "../context/GlobalContext";
 import ProductRow from "../assets/components/ProductRow";
 import ProductFilters from "../assets/components/ProductFilters";
-import useDebounce from "../assets/customHook/useDebounce";
-import useFetchProdotti from "../assets/customHook/useFetchProduct";
-import useFetchCategorie from "../assets/customHook/useFetchCategorie";
-import useOrdinaProdotti from "../assets/customHook/useOrdinaProdotti";
+import useDebounce from "../assets/customHook/utils/useDebounce";
+import useFetchProdotti from "../assets/customHook/product/useFetchProduct";
+import useFetchCategorie from "../assets/customHook/product/useFetchCategorie";
+import useOrdinaProdotti from "../assets/customHook/product/useOrdinaProdotti";
 
 export default function ListaProdotti() {
   const [search, setSearch] = useState("");

@@ -1,8 +1,8 @@
 import { useContext, useEffect, useState } from "react";
 import { GlobalContext } from "../context/GlobalContext";
 import CardDetail from "../assets/components/CardDetail";
-import { useClearListMessage } from "../assets/customHook/useClearListMessage";
-import useFetchFavorites from "../assets/customHook/useFetchFavorites";
+import { useClearListMessage } from "../assets/customHook/utils/useClearListMessage";
+import useFetchFavorites from "../assets/customHook/favorites/useFetchFavorites";
 
 export default function Favorites() {
   const { favoriteList, clearFavorites } = useContext(GlobalContext);

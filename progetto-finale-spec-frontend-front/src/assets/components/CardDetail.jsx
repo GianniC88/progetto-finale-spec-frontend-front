@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import { useSpicinessPeppers } from "../customHook/useSpicinessPeppers";
+import { useSpicinessPeppers } from "../customHook/product/useSpicinessPeppers";
 import { GlobalContext } from "../../context/GlobalContext";
 import FavoriteButton from "./FavoriteButton";
 import CartButton from "./CartButton";

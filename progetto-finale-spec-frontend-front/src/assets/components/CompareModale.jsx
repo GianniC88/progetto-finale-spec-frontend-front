@@ -1,5 +1,5 @@
-import { useSpicinessPeppers } from "../customHook/useSpicinessPeppers";
-import { useIsMobile } from "../customHook/useIsMobile";
+import { useSpicinessPeppers } from "../customHook/product/useSpicinessPeppers";
+import { useIsMobile } from "../customHook/utils/useIsMobile";
 import CompareModalMobile from "./CompareModalMobile";
 import React from "react";
 import Modale from "./Modale";
