@@ -23,7 +23,7 @@ export default function Carrello() {
   const handleRemoveSelected = () => {
     Object.keys(selected)
       .filter((id) => selected[id])
-      .forEach((id) => removeFromCart(id));
+      .forEach((id) => removeFromCart(Number(id)));
     dispatchSelected({ type: "clear" });
   };
 
