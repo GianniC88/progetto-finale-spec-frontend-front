@@ -90,7 +90,10 @@ export default function Compare() {
               </button>
               <button
                 className="btn btn-primary  mb-2 text-white me-2"
-                onClick={() => navigate("/products")}
+                onClick={() => {
+                  window.scrollTo({ top: 0, left: 0, behavior: "auto" });
+                  navigate("/products");
+                }}
               >
                 Aggiungi prodotto
               </button>
