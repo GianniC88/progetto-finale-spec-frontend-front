@@ -12,7 +12,9 @@ export default function ListaProdotti() {
   const [category, setCategory] = useState(() => {
     return localStorage.getItem("selectedCategory") || "";
   });
-  const [sort, setSort] = useState("title-asc");
+  const [sort, setSort] = useState(
+    () => localStorage.getItem("selectedSort") || "title-asc"
+  );
 
   const debouncedSearch = useDebounce(search, 400);
   const { clearFavorites, clearCart, clearCompare } = useContext(GlobalContext);

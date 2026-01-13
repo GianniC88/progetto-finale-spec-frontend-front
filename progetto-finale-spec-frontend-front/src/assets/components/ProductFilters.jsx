@@ -9,10 +9,10 @@ export default function ProductFilters({
   setSort,
   categorie,
 }) {
-  // Salva la categoria selezionata su localStorage ogni volta che cambia
   useEffect(() => {
     localStorage.setItem("selectedCategory", category);
-  }, [category]);
+    localStorage.setItem("selectedSort", sort);
+  }, [category, sort]);
 
   return (
     <div className="mb-5 d-flex gap-3 flex-wrap justify-content-center product-filters">
