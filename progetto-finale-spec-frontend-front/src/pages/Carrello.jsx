@@ -1,4 +1,4 @@
-import { useContext, useReducer, useState, useEffect } from "react";
+import { useContext } from "react";
 import { GlobalContext } from "../context/GlobalContext";
 import ButtonAddRemove from "../assets/components/ButtonAddRemove";
 import { useCartDetails } from "../assets/customHook/cart/useCartDetails";
@@ -59,14 +59,6 @@ export default function Carrello() {
                 className="table table-sm align-middle "
                 style={{ width: "100%" }}
               >
-                <colgroup>
-                  <col style={{ width: "4%" }} />
-                  <col style={{ width: "36%" }} />
-                  <col style={{ width: "15%" }} />
-                  <col style={{ width: "15%" }} />
-                  <col style={{ width: "15%" }} />
-                  <col style={{ width: "15%" }} />
-                </colgroup>
                 <thead>
                   <tr>
                     <th></th>

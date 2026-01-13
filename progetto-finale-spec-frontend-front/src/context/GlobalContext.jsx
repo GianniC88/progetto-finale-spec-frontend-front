@@ -1,23 +1,11 @@
 import { createContext, useState, useEffect } from "react";
-const { VITE_API_URL } = import.meta.env;
 export const GlobalContext = createContext();
 
 export function GlobalProvider({ children }) {
-  const [prodotti, setProdotti] = useState([]);
   const [favoriteList, setFavoriteList] = useState(() => {
     const saved = localStorage.getItem("favoriteList");
     return saved ? JSON.parse(saved) : [];
   });
-
-  useEffect(() => {
-    fetch(`${VITE_API_URL}/products`)
-      .then((res) => res.json())
-      .then((data) => {
-        console.log("Risposta fetch prodotti:", data);
-        setProdotti(data);
-      })
-      .catch((error) => console.error(error));
-  }, []);
 
   // Salva i preferiti su localStorage ogni volta che cambiano
   useEffect(() => {
@@ -88,8 +76,6 @@ export function GlobalProvider({ children }) {
   return (
     <GlobalContext.Provider
       value={{
-        prodotti,
-        setProdotti,
         favoriteList,
         toggleFavorite,
         isFavorite,
