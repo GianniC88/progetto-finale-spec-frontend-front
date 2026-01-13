@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useSpicinessPeppers } from "./SpicinessPeppers";
+import { SpicinessPeppers } from "../components/SpicinessPeppers";
 
 export default function CompareModalMobile({ show, onClose, prodotti }) {
   const [descModal, setDescModal] = useState(null);
@@ -47,7 +47,8 @@ export default function CompareModalMobile({ show, onClose, prodotti }) {
               <strong>Brand:</strong> {p.brand}
             </div>
             <div>
-              <strong>Piccantezza:</strong> {useSpicinessPeppers(p.spiciness)}
+              <strong>Piccantezza:</strong>{" "}
+              <SpicinessPeppers spiciness={p.spiciness} />
             </div>
             <div>
               <strong>Descrizione:</strong>{" "}

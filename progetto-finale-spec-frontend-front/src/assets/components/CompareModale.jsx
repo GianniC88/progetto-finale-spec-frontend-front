@@ -1,4 +1,4 @@
-import { useSpicinessPeppers } from "./SpicinessPeppers";
+import { SpicinessPeppers } from "../components/SpicinessPeppers";
 import { useIsMobile } from "../customHook/utils/useIsMobile";
 import CompareModalMobile from "./CompareModalMobile";
 import React from "react";
@@ -77,7 +77,9 @@ export default function CompareModal({ show, onClose, prodotti }) {
             <strong>Piccantezza</strong>
           </td>
           {prodotti.map((p) => (
-            <td key={p.id}>{useSpicinessPeppers(p.spiciness)}</td>
+            <td key={p.id}>
+              <SpicinessPeppers spiciness={p.spiciness} />
+            </td>
           ))}
         </tr>
         <tr>

@@ -14,8 +14,3 @@ export function SpicinessPeppers({ spiciness }) {
     </>
   );
 }
-
-// compatibilità: alcuni file importano ancora "useSpicinessPeppers"
-export function useSpicinessPeppers(spiciness) {
-  return <SpicinessPeppers spiciness={spiciness} />;
-}
