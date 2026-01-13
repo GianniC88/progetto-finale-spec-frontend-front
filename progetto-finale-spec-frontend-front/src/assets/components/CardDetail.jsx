@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import { useSpicinessPeppers } from "../customHook/product/useSpicinessPeppers";
+import { SpicinessPeppers } from "../components/SpicinessPeppers";
 import { GlobalContext } from "../../context/GlobalContext";
 import FavoriteButton from "./FavoriteButton";
 import CartButton from "./CartButton";
@@ -56,7 +56,7 @@ const CardDetail = ({
         </li>
         <li>
           <strong>{labels.spiciness}:</strong>{" "}
-          {useSpicinessPeppers(prodotto.spiciness)}
+          <SpicinessPeppers spiciness={prodotto.spiciness} />
         </li>
         {Array.isArray(prodotto.images) &&
           prodotto.images.filter(Boolean).length > 0 && (

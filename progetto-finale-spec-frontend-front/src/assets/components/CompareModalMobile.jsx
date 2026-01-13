@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useSpicinessPeppers } from "../customHook/product/useSpicinessPeppers";
+import { useSpicinessPeppers } from "./SpicinessPeppers";
 
 export default function CompareModalMobile({ show, onClose, prodotti }) {
   const [descModal, setDescModal] = useState(null);
