@@ -58,27 +58,28 @@ const CardDetail = ({
           <strong>{labels.spiciness}:</strong>{" "}
           {useSpicinessPeppers(prodotto.spiciness)}
         </li>
-        {prodotto.images && Array.isArray(prodotto.images) && (
-          <li>
-            <strong>{labels.images}:</strong>
-            <ul>
-              {prodotto.images.map((img, idx) => (
-                <li key={idx}>
-                  <img
-                    src={img}
-                    alt={`Immagine aggiuntiva ${idx + 1}`}
-                    style={{
-                      maxWidth: "100px",
-                      margin: "5px",
-                      cursor: "pointer",
-                    }}
-                    onClick={() => setModalImg(img)}
-                  />
-                </li>
-              ))}
-            </ul>
-          </li>
-        )}
+        {Array.isArray(prodotto.images) &&
+          prodotto.images.filter(Boolean).length > 0 && (
+            <li>
+              <strong>{labels.images}:</strong>
+              <ul>
+                {prodotto.images.filter(Boolean).map((img, idx) => (
+                  <li key={`${img}-${idx}`}>
+                    <img
+                      src={img}
+                      alt={`Immagine aggiuntiva ${idx + 1}`}
+                      style={{
+                        maxWidth: "100px",
+                        margin: "5px",
+                        cursor: "pointer",
+                      }}
+                      onClick={() => setModalImg(img)}
+                    />
+                  </li>
+                ))}
+              </ul>
+            </li>
+          )}
       </ul>
       <div className="d-flex card-actions-fixed">
         <FavoriteButton prodottoId={prodotto.id} />
