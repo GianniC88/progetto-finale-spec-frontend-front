@@ -1,4 +1,4 @@
-import { useEffect, useState, useContext, useMemo } from "react";
+import { useState, useContext } from "react";
 import { GlobalContext } from "../context/GlobalContext";
 import ProductRow from "../assets/components/ProductRow";
 import ProductFilters from "../assets/components/ProductFilters";
