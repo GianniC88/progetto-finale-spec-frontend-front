@@ -10,24 +10,31 @@ import CarrelloMobileList from "../assets/components/CarrelloMobileList";
 
 export default function Carrello() {
   const { cart, removeFromCart, clearCart } = useContext(GlobalContext);
+  // Stato locale: quali prodotti sono selezionati (checkbox)
   const [selected, dispatchSelected] = useSelectedReducer();
   const { dettagli, loading } = useCartDetails(cart);
+  // Mappa di supporto: { [idProdotto]: quantita } ricavata dal contenuto del carrello
   const cartCount = useCartCount(cart);
+  // Messaggio "flash" dell'ultima azione (es. + / -). È unico, non per-riga.
   const [msg, showMsg] = useActionMessage();
   const isMobile = useIsMobile(768);
 
+  // Toggle della checkbox per un singolo prodotto
   const handleSelect = (id) => {
     dispatchSelected({ type: "toggle", id });
   };
 
+  // Rimuove dal carrello tutti i prodotti attualmente selezionati
   const handleRemoveSelected = () => {
     Object.keys(selected)
       .filter((id) => selected[id])
+      // Object.keys() ritorna stringhe: converto l'id prima di passarlo a removeFromCart
       .forEach((id) => removeFromCart(Number(id)));
+    // Dopo la rimozione, azzera le selezioni per evitare stati incoerenti
     dispatchSelected({ type: "clear" });
   };
 
-  // Calcola il totale
+  // Calcola il totale carrello sommando (quantità * prezzo) per ogni prodotto
   const totale = dettagli.reduce((sum, prodotto) => {
     const qty = cartCount[prodotto.id] || 0;
     const prezzo = Number(prodotto.price) || 0;
@@ -43,6 +50,7 @@ export default function Carrello() {
         <div>Il carrello è vuoto.</div>
       ) : (
         <>
+          {/* Mobile: delego la UI a un componente dedicato; Desktop: tabella */}
           {isMobile ? (
             <CarrelloMobileList
               dettagli={dettagli}
@@ -136,6 +144,7 @@ export default function Carrello() {
           )}
 
           <div className="mt-3 ms-2">
+            {/* Nota: cart.length = numero totale di "pezzi" nel carrello (può includere duplicati) */}
             <strong>Totale prodotti:</strong> {cart.length}
             <br />
             <strong>Totale carrello:</strong> {totale.toFixed(2)} €

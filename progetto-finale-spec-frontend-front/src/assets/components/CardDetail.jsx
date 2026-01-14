@@ -5,6 +5,8 @@ import FavoriteButton from "./FavoriteButton";
 import CartButton from "./CartButton";
 import ButtonAddRemove from "./ButtonAddRemove";
 import CompareButton from "./CompareButton";
+
+// Etichette usate per rendere più leggibile la lista dei dettagli prodotto
 const labels = {
   title: "Titolo",
   category: "Categoria",
@@ -18,17 +20,23 @@ const labels = {
 
 const CardDetail = ({
   prodotto,
+  // Se true, mostra una checkbox (utile in pagine tipo comparatore)
   showCheckbox = false,
+  // Stato controllato della checkbox
   checked = false,
+  // Handler (controllato dal padre) per aggiornare la checkbox
   onCheckboxChange,
 }) => {
   const { isFavorite } = useContext(GlobalContext);
+  // Stato locale per aprire/chiudere la modale dell'immagine (img selezionata)
   const [modalImg, setModalImg] = useState(null);
 
+  // Guard clause: evita crash se il prodotto non è stato caricato/trovato
   if (!prodotto) return <div>Nessun prodotto trovato.</div>;
   return (
     <div className="card-detail card-common " style={{ position: "relative" }}>
       <h2>{prodotto.title}</h2>
+      {/* Immagine principale (cliccabile per aprire la modale) */}
       {prodotto.image && (
         <img
           src={prodotto.image}
@@ -58,6 +66,7 @@ const CardDetail = ({
           <strong>{labels.spiciness}:</strong>{" "}
           <SpicinessPeppers spiciness={prodotto.spiciness} />
         </li>
+        {/* Render condizionale: lista immagini aggiuntive solo se presente e non vuota */}
         {Array.isArray(prodotto.images) &&
           prodotto.images.filter(Boolean).length > 0 && (
             <li>
@@ -82,7 +91,10 @@ const CardDetail = ({
           )}
       </ul>
       <div className="d-flex card-actions-fixed">
+        {/* Preferiti: sempre visibile (toggle del preferito) */}
         <FavoriteButton prodottoId={prodotto.id} />
+
+        {/* Azioni aggiuntive visibili solo se il prodotto è tra i preferiti */}
         {isFavorite && isFavorite(prodotto.id) && (
           <>
             <CartButton prodottoId={prodotto.id} />
@@ -106,6 +118,7 @@ const CardDetail = ({
       {modalImg && (
         <div
           className="modal-backdrop"
+          // Click sul backdrop chiude la modale
           style={{
             position: "fixed",
             top: 0,
@@ -129,6 +142,7 @@ const CardDetail = ({
               borderRadius: "8px",
               boxShadow: "0 0 20px #000",
             }}
+            // Evita che il click sull'immagine chiuda la modale
             onClick={(e) => e.stopPropagation()}
           />
         </div>

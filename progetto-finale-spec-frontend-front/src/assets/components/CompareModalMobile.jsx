@@ -2,12 +2,17 @@ import React, { useState } from "react";
 import { SpicinessPeppers } from "../components/SpicinessPeppers";
 
 export default function CompareModalMobile({ show, onClose, prodotti }) {
+  // Stato locale per gestire una "sotto-modale" con la descrizione completa
+  // (utile su mobile per non appesantire la card del prodotto).
   const [descModal, setDescModal] = useState(null);
 
+  // Se la modale non deve essere visibile, non renderizzo nulla
   if (!show) return null;
 
   return (
+    // Overlay: click fuori dalla dialog chiude la modale (onClose arriva dal padre)
     <div className="custom-modal" onClick={onClose}>
+      {/* Dialog: stopPropagation per evitare che un click interno chiuda la modale */}
       <div className="custom-modal-dialog" onClick={(e) => e.stopPropagation()}>
         <button
           className="btn btn-danger custom-modal-close-btn"
@@ -18,11 +23,14 @@ export default function CompareModalMobile({ show, onClose, prodotti }) {
         <h4 className="mb-3">
           <strong>Confronto dettagliato</strong>
         </h4>
+
+        {/* Su mobile mostro i prodotti uno sotto l'altro (card) */}
         {prodotti.map((p) => (
           <div
             key={p.id}
             className="mb-4 p-3 border rounded bg-white shadow-sm"
           >
+            {/* Immagine preview */}
             <div className="text-center mb-2">
               <img
                 src={p.image}
@@ -34,6 +42,7 @@ export default function CompareModalMobile({ show, onClose, prodotti }) {
                 }}
               />
             </div>
+            {/* Dati principali */}
             <div>
               <strong>{p.title}</strong>
             </div>
@@ -52,6 +61,8 @@ export default function CompareModalMobile({ show, onClose, prodotti }) {
             </div>
             <div>
               <strong>Descrizione:</strong>{" "}
+              {/* Uso <details>/<summary> solo come "trigger" cliccabile.
+                  Prevengo l'apertura nativa e apro una sotto-modale leggibile. */}
               <details
                 style={{ display: "inline" }}
                 onClick={(e) => {
@@ -76,6 +87,7 @@ export default function CompareModalMobile({ show, onClose, prodotti }) {
 
         {/* Modale descrizione */}
         {descModal && (
+          // Overlay della sotto-modale: click fuori chiude (setDescModal(null))
           <div
             className="custom-modal"
             style={{
@@ -92,6 +104,7 @@ export default function CompareModalMobile({ show, onClose, prodotti }) {
             }}
             onClick={() => setDescModal(null)}
           >
+            {/* Dialog della sotto-modale: stopPropagation per non chiudere quando clicco dentro */}
             <div
               className="custom-modal-dialog"
               style={{

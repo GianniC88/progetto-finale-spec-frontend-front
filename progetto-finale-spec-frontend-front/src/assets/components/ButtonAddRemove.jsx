@@ -2,12 +2,18 @@ import { useContext, useRef, useState, useEffect } from "react";
 import { GlobalContext } from "../../context/GlobalContext";
 
 export default function ButtonAddRemove({ prodottoId, quantity }) {
+  // Funzioni dal context: aggiunge 1 al carrello o decrementa di 1
   const { addToCart, decreaseFromCart } = useContext(GlobalContext);
+
+  // Messaggio "flash" mostrato dopo un'azione (+ / -)
   const [msg, setMsg] = useState("");
+
+  // useRef perché non serve un re-render: ci basta ricordare l'ultima azione
   const lastAction = useRef(null); // "add" o "remove"
 
   useEffect(() => {
-    // Mostra il banner solo se c'è stata un'azione
+    // Mostra il banner solo se c'è stata un'azione.
+    // Dipende da quantity: dopo add/remove, quantity cambia e scatta l'effetto.
     if (lastAction.current === "add") {
       setMsg(`Prodotti aggiunti (${quantity})`);
       const t = setTimeout(() => setMsg(""), 1500);
@@ -21,11 +27,13 @@ export default function ButtonAddRemove({ prodottoId, quantity }) {
   }, [quantity]);
 
   const handleAdd = () => {
+    // Salvo l'azione, poi aggiorno il carrello
     lastAction.current = "add";
     addToCart(prodottoId);
   };
 
   const handleRemove = () => {
+    // Salvo l'azione, poi aggiorno il carrello
     lastAction.current = "remove";
     decreaseFromCart(prodottoId);
   };
@@ -43,6 +51,7 @@ export default function ButtonAddRemove({ prodottoId, quantity }) {
           marginLeft: "20px",
         }}
       >
+        {/* Bottone + : incrementa la quantità */}
         <button
           className="btn btn-outline-secondary"
           onClick={handleAdd}
@@ -56,6 +65,7 @@ export default function ButtonAddRemove({ prodottoId, quantity }) {
         >
           +
         </button>
+        {/* Bottone - : decrementa la quantità (disabilitato quando quantity <= 1) */}
         <button
           className="btn btn-outline-secondary"
           onClick={handleRemove}
@@ -71,7 +81,9 @@ export default function ButtonAddRemove({ prodottoId, quantity }) {
           -
         </button>
       </div>
+      {/* Quantità attuale mostrata accanto ai bottoni */}
       <span style={{ fontSize: "0.95em", marginLeft: "4px" }}>{quantity}</span>
+      {/* Banner temporaneo di feedback dell'azione */}
       {msg && (
         <div
           className="carrello-modal-banner"
