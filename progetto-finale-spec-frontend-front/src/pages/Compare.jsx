@@ -6,22 +6,30 @@ import { useNavigate } from "react-router-dom";
 import useFetchCompareProducts from "../assets/customHook/compare/useFetchCompareProducts";
 
 export default function Compare() {
+  // Stato globale: lista prodotti in confronto + azioni correlate
   const { compareList, setCompareList, removeFromCompare } =
     useContext(GlobalContext);
+
+  // UI locale (modale/feedback) + selezione persistita
   const [showModal, setShowModal] = useState(false);
   const [selected, setSelected] = useState(() => {
+    // Init selezione (localStorage)
     const saved = localStorage.getItem("compareSelected");
     return saved ? JSON.parse(saved) : {};
   });
   const [showSuccess, setShowSuccess] = useState(false);
   const navigate = useNavigate();
 
+  // Persistenza selezione tra refresh/navigazione
   useEffect(() => {
+    // Sync selezione (localStorage)
     localStorage.setItem("compareSelected", JSON.stringify(selected));
   }, [selected]);
+
+  // Dati di dettaglio dei prodotti da confrontare
   const prodotti = useFetchCompareProducts(compareList);
 
-  // Quando compareList cambia (dopo eliminazione), azzera selected e il messaggio di successo
+  // Reset selezione/feedback dopo modifiche alla lista
   useEffect(() => {
     if (showSuccess) {
       setSelected({});
@@ -31,6 +39,7 @@ export default function Compare() {
   }, [compareList, showSuccess]);
 
   const handleDeleteSelected = () => {
+    // Rimozione multipla dalla lista di confronto
     const idsToRemove = Object.keys(selected).filter((id) => selected[id]);
     setCompareList((prev) =>
       prev.filter((item) => !idsToRemove.map(Number).includes(Number(item)))
@@ -60,6 +69,7 @@ export default function Compare() {
           <div>Seleziona 2 prodotti dalla lista per confrontarli.</div>
         ) : (
           <>
+            {/* Griglia prodotti con selezione */}
             <div className="row">
               {prodotti.map((prodotto) => (
                 <div
@@ -80,6 +90,7 @@ export default function Compare() {
                 </div>
               ))}
             </div>
+            {/* Azioni principali del comparatore */}
             <div className=" container azioni-comparatore text-center  mt-4">
               <button
                 className="btn btn-success mb-2 text-white me-2"
