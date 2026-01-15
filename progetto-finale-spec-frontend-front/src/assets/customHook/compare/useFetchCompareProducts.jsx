@@ -5,6 +5,8 @@ function useFetchCompareProducts(compareList) {
 
   useEffect(() => {
     const apiUrl = import.meta.env.VITE_API_URL;
+
+    // Normalizza l'input: accetta solo id primitivi (string/number) prima delle chiamate HTTP.
     const validIds = Array.isArray(compareList)
       ? compareList.filter(
           (id) => typeof id === "string" || typeof id === "number"
@@ -17,6 +19,7 @@ function useFetchCompareProducts(compareList) {
 
     const fetchProducts = async () => {
       try {
+        // Richieste concorrenti; Promise.all restituisce i risultati nell'ordine di validIds.
         const prodotti = await Promise.all(
           validIds.map(async (id) => {
             try {
@@ -25,13 +28,17 @@ function useFetchCompareProducts(compareList) {
                 throw new Error(`Errore HTTP prodotto: ${res.status}`);
               }
               const data = await res.json();
+
+              // Compatibilità API: alcuni endpoint rispondono con { product: ... }.
               return data.product || data;
             } catch (error) {
+              // Se un id fallisce, viene escluso senza interrompere il caricamento degli altri.
               console.error(error);
               return null;
             }
           })
         );
+
         setProdotti(prodotti.filter(Boolean));
       } catch (error) {
         setProdotti([]);

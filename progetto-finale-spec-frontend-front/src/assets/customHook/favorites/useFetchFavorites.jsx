@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 
+// Hook “di dominio”: risolve la lista preferiti in dettagli prodotto, con fetch parallele e tolleranza a errori per-item.
 export default function useFetchFavorites(favoriteList) {
   const [prodotti, setProdotti] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -7,6 +8,8 @@ export default function useFetchFavorites(favoriteList) {
   useEffect(() => {
     const fetchFavorites = async () => {
       const apiUrl = import.meta.env.VITE_API_URL;
+
+      // Scelta: input permissivo (accetta solo id coerenti e ignora valori sporchi).
       const validIds = Array.isArray(favoriteList)
         ? favoriteList.filter(
             (id) => typeof id === "string" || typeof id === "number"
@@ -18,6 +21,7 @@ export default function useFetchFavorites(favoriteList) {
         return;
       }
       try {
+        // Scelta: richieste in parallelo (Promise.all) e risultato filtrato dai fallimenti.
         const prodotti = await Promise.all(
           validIds.map(async (id) => {
             try {
